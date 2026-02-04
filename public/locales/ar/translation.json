@@ -1,0 +1,448 @@
+{
+    "common": {
+        "dashboard": "لوحة القيادة",
+        "users": "المستخدمين",
+        "courses": "الدروس والفيديوهات",
+        "tests": "الاختبارات",
+        "premium": "بريميوم",
+        "payments": "المدفوعات",
+        "analytics": "التحليلات",
+        "settings": "الإعدادات",
+        "notifications": "الإشعارات",
+        "view_site": "عرض الموقع",
+        "admin": "مسؤول",
+        "logout": "تسجيل الخروج",
+        "welcome": "أهلاً بك",
+        "search": "بحث...",
+        "loading": "جار التحميل...",
+        "error": "حدث خطأ",
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "delete": "حذف",
+        "edit": "تعديل",
+        "actions": "إجراءات",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "role": "الدور",
+        "completed": "مكتمل",
+        "start": "بدء",
+        "continue": "متابعة",
+        "share": "مشاركة"
+    },
+    "home": {
+        "hero": {
+            "badge": "المنصة رقم 1 في تونس",
+            "title": "اجتز امتحان قانون الطرقات بنجاح",
+            "subtitle": "المنصة الشاملة لتعلم وإتقان قانون الطرقات التونسي",
+            "start_learning": "ابدأ التعلم",
+            "take_test": "اجتياز اختبار"
+        },
+        "stats": {
+            "students": "طلاب مسجلون",
+            "success_rate": "نسبة النجاح",
+            "courses": "دروس متاحة",
+            "rating": "متوسط التقييم"
+        },
+        "features_section": {
+            "title": "كل ما تحتاجه للنجاح",
+            "subtitle": "منصة شاملة بكل الأدوات اللازمة لتعلمك"
+        },
+        "features": {
+            "complete_courses": "دروس شاملة",
+            "complete_courses_desc": "دروس مفصلة تغطي جميع جوانب قانون الطرقات التونسي",
+            "video_lessons": "فيديوهات تعليمية",
+            "video_lessons_desc": "فيديوهات توضيحية لفهم المواقف الحقيقية بشكل أفضل",
+            "practice_tests": "اختبارات ومحاكاة",
+            "practice_tests_desc": "اختبارات تجريبية لإعدادك في ظروف حقيقية",
+            "progress_tracking": "تتبع التقدم",
+            "progress_tracking_desc": "تخيل تقدمك وحدد النقاط التي تحتاج إلى تحسين"
+        },
+        "why_choose": {
+            "title": "لماذا تختار CodeTunisiePro؟"
+        },
+        "advantages": {
+            "modern_interface": "واجهة حديثة وبديهية",
+            "regular_updates": "محتوى يتم تحديثه بانتظام",
+            "accessible": "متاح 24/24 و 7/7",
+            "mobile_compatible": "متوافق مع الهاتف المحمول والكمبيوتر اللوحي",
+            "detailed_explanations": "تفسيرات مفصلة",
+            "level_adapted": "اختبارات مكيفة حسب المستوى"
+        },
+        "testimonials": {
+            "title": "ماذا يقول طلابنا",
+            "subtitle": "انضم إلى الآلاف من الطلاب الراضين"
+        },
+        "cta": {
+            "title": "هل أنت مستعد لبدء التعلم؟",
+            "subtitle": "انضم إلى CodeTunisiePro اليوم وانجح في رخصة القيادة الخاصة بك!",
+            "button": "ابدأ الآن"
+        }
+    },
+    "dashboard": {
+        "welcome_back": "مرحباً بعودتك",
+        "progress_summary": "ملخص تقدمك",
+        "tests_passed": "الاختبارات الناجحة",
+        "average_score": "متوسط النقاط",
+        "study_time": "وقت الدراسة",
+        "recent_activity": "النشاط الأخير"
+    },
+    "premium": {
+        "title": "ارتقِ إلى المستوى المميز",
+        "subtitle": "افتح الإمكانات الكاملة لـ CodeTunisiePro ونجح في قانون الطرقات من المحاولة الأولى.",
+        "plan_free": "مجاني",
+        "plan_monthly": "شهري",
+        "plan_lifetime": "مدى الحياة",
+        "select": "اختيار",
+        "popular": "شائع",
+        "best_value": "أفضل عرض",
+        "guarantee": "ضمان النجاح",
+        "exclusive_content": "محتوى حصري",
+        "no_ads": "بدون إعلانات",
+        "payment_method": "طريقة الدفع",
+        "pay": "دفع",
+        "secure_payment": "دفع آمن 100% عبر SSL"
+    },
+    "courses": {
+        "title": "دروس قانون الطرقات",
+        "subtitle": "تصفح دروسنا الشاملة وتعلم بالسرعة التي تناسبك",
+        "search_placeholder": "البحث عن درس...",
+        "category_placeholder": "الفئة",
+        "filter_tooltip": "تصفية حسب الفئة",
+        "error_loading": "تعذر تحميل الدروس. يرجى المحاولة مرة أخرى لاحقاً.",
+        "no_courses": "لم يتم العثور على دروس",
+        "try_adjusting_filters": "حاول تعديل الفلاتر الخاصة بك",
+        "stats": {
+            "available": "دروس متاحة",
+            "completed": "مكتملة",
+            "in_progress": "قيد التقدم",
+            "global_progress": "التقدم العام"
+        },
+        "back_to_list": "العودة للقائمة",
+        "your_progress": "تقدمك",
+        "lessons_count": "درس",
+        "start_course": "ابدأ الدورة",
+        "continue_course": "تابع الدورة"
+    },
+    "categories": {
+        "regles": "القواعد",
+        "signalisation": "الإشارات",
+        "priorites": "الأولوية",
+        "securite": "السلامة",
+        "mecanique": "الميكانيك"
+    },
+    "videos": {
+        "title": "فيديوهات تعليمية",
+        "subtitle": "تعلم من خلال فيديوهاتنا التوضيحية والمواقف الحقيقية",
+        "search_placeholder": "البحث عن فيديو...",
+        "filter_tooltip": "عرض الفيديوهات من",
+        "error_loading": "تعذر تحميل الفيديو. يرجى المحاولة مرة أخرى لاحقاً.",
+        "no_videos": "لم يتم العثور على أي فيديو",
+        "try_adjusting_search": "حاول تعديل بحثك",
+        "found_count": "فيديو تم العثور عليه",
+        "views": "مشاهدة",
+        "duration": "المدة",
+        "stats": {
+            "available": "فيديوهات متاحة",
+            "completed": "مكتملة",
+            "total_views": "إجمالي المشاهدات"
+        }
+    },
+    "tests": {
+        "title": "الاختبارات والامتحانات التجريبية",
+        "subtitle": "اختبر معلوماتك واستعد للامتحان الرسمي",
+        "error_loading": "تعذر تحميل الاختبارات. يرجى المحاولة مرة أخرى لاحقاً.",
+        "error_starting": "تعذر بدء الاختبار.",
+        "empty_test": "لا يحتوي هذا الاختبار على أي أسئلة في الوقت الحالي.",
+        "no_tests": "لا توجد اختبارات متاحة في الوقت الحالي.",
+        "question_progress": "السؤال {{current}} من {{total}}",
+        "correct_answer_msg": "إجابة صحيحة!",
+        "wrong_answer_msg": "إجابة خاطئة",
+        "view_results": "عرض النتائج",
+        "congratulations": "مبروك!",
+        "keep_trying": "واصل جهودك!",
+        "result_summary": "لقد أجبت بشكل صحيح على {{correct}} من أصل {{total}} سؤال",
+        "detailed_results": "تفاصيل الإجابات",
+        "question_template": "السؤال {{number}}",
+        "correct_answer_label": "إجابة صحيحة",
+        "correct_answer_value": "الإجابة الصحيحة: {{value}}",
+        "back_to_tests": "العودة إلى الاختبارات",
+        "retry": "إعادة المحاولة",
+        "detailed_corrections": "تصحيح مفصل",
+        "your_answer": "إجابتك",
+        "correct_answer": "الإجابة الصحيحة",
+        "back_to_list": "العودة للقائمة",
+        "stats": {
+            "available": "اختبارات متاحة",
+            "passed": "اختبارات ناجحة",
+            "in_progress": "قيد التقدم",
+            "avg_score": "متوسط النقاط",
+            "correct_answers": "إجابات صحيحة",
+            "wrong_answers": "إجابات خاطئة",
+            "total_questions": "مجموع الأسئلة"
+        }
+    },
+    "dashboard_page": {
+        "welcome": "مرحباً، {{name}}!",
+        "progression_subtitle": "إليك تقدمك اليوم",
+        "days_unit": "أيام",
+        "weekly_activity": "النشاط الأسبوعي",
+        "category_progress": "التقدم حسب الفئة",
+        "recent_courses": "أحدث الدروس",
+        "badges_earned": "الشارات المكتسبة",
+        "earned_on": "تم الحصول عليها في",
+        "course_distribution": "توزيع الدروس",
+        "stats": {
+            "courses_completed": "الدروس المكتملة",
+            "tests_passed": "الاختبارات الناجحة",
+            "avg_score": "متوسط النقاط",
+            "current_streak": "السلسلة الحالية"
+        },
+        "days": {
+            "mon": "الاثنين",
+            "tue": "الثلاثاء",
+            "wed": "الأربعاء",
+            "thu": "الخميس",
+            "fri": "الجمعة",
+            "sat": "السبت",
+            "sun": "الأحد"
+        },
+        "categories": {
+            "signs": "الإشارات",
+            "rules": "القواعد",
+            "safety": "السلامة",
+            "infractions": "المخالفات"
+        },
+        "status": {
+            "completed": "مكتملة",
+            "in_progress": "قيد التقدم",
+            "not_started": "لم تبدأ"
+        },
+        "recommendations": {
+            "title": "توصيات",
+            "streak_title": "واصل السلسلة!",
+            "streak_desc": "أكمل درسًا اليوم للحفاظ على سلسلتك لمدة {{count}} أيام",
+            "next_step_title": "الخطوة التالية",
+            "next_step_desc": "جرب درس 'التوقف والتواقف' لتحسين معلوماتك",
+            "challenge_title": "تحدي اليوم",
+            "challenge_desc": "انجح في اختبار بنسبة تزيد عن 80% لفتح شارة جديدة"
+        }
+    },
+    "pricing": {
+        "monthly": {
+            "title": "شهري",
+            "duration": "1 شهر",
+            "description": "مثالي للمراجعة المكثفة",
+            "features": [
+                "وصول غير محدود لأكثر من 500 سؤال",
+                "دروس كاملة لقانون المرور",
+                "فيديوهات توضيحية عالية الدقة",
+                "إحصائيات مفصلة",
+                "دعم ذو أولوية"
+            ]
+        },
+        "quarterly": {
+            "title": "ربع سنوي",
+            "duration": "3 أشهر",
+            "description": "الخيار الأكثر شعبية",
+            "badge": "شائع",
+            "features": [
+                "كل ما هو مشمول في الشهري",
+                "وصول صالح لمدة 90 يومًا",
+                "ضمان النجاح أو استرداد الأموال",
+                "وضع الامتحان التجريبي غير المحدود",
+                "تصحيح مفصل للأخطاء"
+            ]
+        },
+        "annual": {
+            "title": "سنوي",
+            "duration": "1 سنة",
+            "description": "لتأخذ وقتك بالكامل",
+            "badge": "أفضل عرض",
+            "features": [
+                "وصول كامل لمدة 365 يومًا",
+                "تحديثات مجانية للكود",
+                "جميع المزايا المميزة",
+                "شهادة نجاح",
+                "تدريب شخصي"
+            ]
+        }
+    },
+    "payment": {
+        "d17": {
+            "description": "دفع عبر الهاتف المحمول سريع وآمن"
+        },
+        "card": {
+            "name": "بطاقة بنكية",
+            "description": "فيزا، ماستركارد، CIB"
+        }
+    },
+    "premium_page": {
+        "title": "انتقل إلى المستوى",
+        "title_highlight": "المميز",
+        "subtitle": "افتح كل إمكانات CodeTunisiePro واجتز قانون المرور من المحاولة الأولى.",
+        "benefits": {
+            "guarantee_title": "ضمان النجاح",
+            "guarantee_desc": "يتمتع مستخدمونا المميزون بمعدل نجاح 98%.",
+            "content_title": "محتوى حصري",
+            "content_desc": "الوصول إلى الأسئلة الصعبة وفخاخ الامتحان.",
+            "no_ads_title": "بدون إعلانات",
+            "no_ads_desc": "تجربة تعليمية سلسة وبدون تشتيت."
+        },
+        "select": "اختيار",
+        "order_summary": "ملخص الطلب",
+        "subscription_of": "اشتراك لمدة",
+        "payment_method": "طريقة الدفع",
+        "payment_info": "بالنقر على تأكيد، ستتم إعادة توجيهك إلى منصة الدفع الآمنة لدينا. لن يتم إجراء أي خصم تلقائي في نهاية الفترة.",
+        "pay_button": "دفع",
+        "processing": "جاري المعالجة...",
+        "secure_payment": "دفع آمن 100% SSL",
+        "redirecting": "جاري التوجيه إلى بوابة الدفع...",
+        "payment_success": "تمت محاكاة الدفع بنجاح!"
+    },
+    "profile_page": {
+        "tabs": {
+            "overview": "نظرة عامة",
+            "achievements": "الإنجازات",
+            "history": "السجل",
+            "settings": "الإعدادات",
+            "premium": "مميز"
+        },
+        "personal_info": {
+            "role_admin": "مسؤول",
+            "role_user": "مستخدم",
+            "member_since": "عضو منذ",
+            "change_photo": "تغيير الصورة"
+        },
+        "actions": {
+            "edit": "تعديل",
+            "change_password": "كلمة المرور",
+            "save": "حفظ",
+            "cancel": "إلغاء",
+            "save_preferences": "حفظ التفضيلات"
+        },
+        "forms": {
+            "edit_profile_title": "تعديل الملف الشخصي",
+            "edit_profile_desc": "قم بتحديث معلوماتك الشخصية.",
+            "name": "الاسم الكامل",
+            "phone": "الهاتف",
+            "change_password_title": "تغيير كلمة المرور",
+            "change_password_desc": "تأكد من استخدام كلمة مرور قوية وآمنة.",
+            "current_password": "كلمة المرور الحالية",
+            "new_password": "كلمة المرور الجديدة",
+            "confirm_password": "تأكيد كلمة المرور"
+        },
+        "toasts": {
+            "load_error": "تعذر تحميل الملف الشخصي",
+            "update_success": "تم تحديث الملف الشخصي بنجاح",
+            "update_error": "خطأ أثناء التحديث",
+            "password_mismatch": "كلمات المرور غير متطابقة",
+            "password_length": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
+            "password_success": "تم تغيير كلمة المرور بنجاح",
+            "password_error": "خطأ أثناء تغيير كلمة المرور",
+            "avatar_success": "تم تحديث صورة الملف الشخصي",
+            "avatar_error": "خطأ أثناء التحميل"
+        },
+        "stats": {
+            "courses_completed": "الدروس المكتملة",
+            "lessons_completed": "الدروس المنتهية",
+            "tests_taken": "الاختبارات المجراة",
+            "total_attempts": "إجمالي المحاولات",
+            "tests_passed": "الاختبارات الناجحة",
+            "rate": "المعدل",
+            "avg_score": "متوسط النقاط",
+            "on_all_tests": "في جميع الاختبارات"
+        },
+        "recent_activity": {
+            "title": "النشاط الأخير",
+            "subtitle": "آخر 5 محاولات اختبار",
+            "no_activity": "لا يوجد نشاط حديث. ابدأ اختبارًا!",
+            "test_deleted": "اختبار محذوف",
+            "unknown_test": "اختبار غير معروف",
+            "general": "عام",
+            "passed": "ناجح",
+            "failed": "راسب"
+        },
+        "achievements": {
+            "title": "الإنجازات",
+            "unlocked": "مفتوحة",
+            "status_unlocked": "مفتوح",
+            "list": {
+                "first_step": {
+                    "name": "الخطوة الأولى",
+                    "desc": "أكمل اختبارك الأول"
+                },
+                "perfectionist": {
+                    "name": "المثالي",
+                    "desc": "احصل على 100% في اختبار"
+                },
+                "diligent": {
+                    "name": "المجتهد",
+                    "desc": "اجتز 10 اختبارات"
+                },
+                "expert": {
+                    "name": "الخبير",
+                    "desc": "انجح في 20 اختبارًا"
+                },
+                "champion": {
+                    "name": "البطل",
+                    "desc": "حافظ على معدل نجاح 80%+"
+                },
+                "determined": {
+                    "name": "المصمم",
+                    "desc": "أكمل 5 دروس"
+                }
+            }
+        },
+        "history": {
+            "title": "السجل الكامل",
+            "subtitle": "جميع نتائج امتحاناتك",
+            "no_history": "لا يوجد سجل متاح."
+        },
+        "settings": {
+            "notifications_title": "الإشعارات",
+            "notifications_desc": "إدارة تفضيلات الإشعارات الخاصة بك",
+            "email": {
+                "label": "إشعارات البريد الإلكتروني",
+                "desc": "تلقي رسائل بريد إلكتروني للتحديثات المهمة"
+            },
+            "reminders": {
+                "label": "تذكيرات الاختبار",
+                "desc": "تلقي تذكيرات لمواصلة تعلمك"
+            },
+            "progress": {
+                "label": "تحديثات التقدم",
+                "desc": "تلقي ملخصات أسبوعية لتقدمك"
+            },
+            "marketing": {
+                "label": "رسائل تسويقية",
+                "desc": "تلقي العروض والمستجدات"
+            }
+        },
+        "premium": {
+            "title": "الحالة المميزة",
+            "subtitle": "استمتع بجميع المزايا المميزة",
+            "features": {
+                "unlimited": {
+                    "title": "وصول غير محدود",
+                    "desc": "جميع الدروس والاختبارات متاحة"
+                },
+                "no_ads": {
+                    "title": "بدون إعلانات",
+                    "desc": "تجربة تعلم سلسة"
+                },
+                "priority_support": {
+                    "title": "دعم ذو أولوية",
+                    "desc": "مساعدة سريعة ومخصصة"
+                },
+                "advanced_stats": {
+                    "title": "إحصائيات متقدمة",
+                    "desc": "تحليلات مفصلة للتقدم"
+                }
+            },
+            "active_subscription": {
+                "title": "اشتراك نشط",
+                "desc": "تجديد تلقائي"
+            }
+        }
+    }
+}

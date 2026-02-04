@@ -1,0 +1,469 @@
+{
+    "common": {
+        "dashboard": "Tableau de bord",
+        "users": "Utilisateurs",
+        "courses": "Cours & Vidéos",
+        "tests": "Tests",
+        "premium": "Premium",
+        "payments": "Paiements",
+        "analytics": "Analytiques",
+        "settings": "Paramètres",
+        "notifications": "Notifications",
+        "view_site": "Voir le site",
+        "admin": "Administrateur",
+        "logout": "Déconnexion",
+        "welcome": "Bienvenue",
+        "search": "Rechercher...",
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "actions": "Actions",
+        "status": "Statut",
+        "date": "Date",
+        "role": "Rôle",
+        "completed": "Terminé",
+        "start": "Commencer",
+        "continue": "Continuer",
+        "share": "Partager",
+        "finish": "Terminer",
+        "next": "Suivant",
+        "previous": "Précédent",
+        "quit": "Quitter",
+        "explanation": "Explication"
+    },
+    "home": {
+        "hero": {
+            "badge": "Plateforme #1 en Tunisie",
+            "title": "Réussissez votre Code de la route",
+            "subtitle": "La plateforme complète pour apprendre et maîtriser le Code de la route tunisien",
+            "start_learning": "Commencer à apprendre",
+            "take_test": "Passer un test"
+        },
+        "stats": {
+            "students": "Étudiants inscrits",
+            "success_rate": "Taux de réussite",
+            "courses": "Cours disponibles",
+            "rating": "Note moyenne"
+        },
+        "features_section": {
+            "title": "Tout ce dont vous avez besoin pour réussir",
+            "subtitle": "Une plateforme complète avec tous les outils nécessaires pour votre apprentissage"
+        },
+        "features": {
+            "complete_courses": "Cours complets",
+            "complete_courses_desc": "Des cours détaillés couvrant tous les aspects du code de la route tunisien",
+            "video_lessons": "Vidéos pédagogiques",
+            "video_lessons_desc": "Des vidéos explicatives pour mieux comprendre les situations réelles",
+            "practice_tests": "Tests et examens",
+            "practice_tests_desc": "Des tests blancs pour vous préparer dans les conditions réelles",
+            "progress_tracking": "Suivi de progression",
+            "progress_tracking_desc": "Visualisez votre progression et identifiez vos points à améliorer"
+        },
+        "why_choose": {
+            "title": "Pourquoi choisir CodeTunisiePro ?"
+        },
+        "advantages": {
+            "modern_interface": "Interface moderne et intuitive",
+            "regular_updates": "Contenu régulièrement mis à jour",
+            "accessible": "Accessible 24h/24 et 7j/7",
+            "mobile_compatible": "Compatible mobile et tablette",
+            "detailed_explanations": "Explications détaillées",
+            "level_adapted": "Tests adaptés au niveau"
+        },
+        "testimonials": {
+            "title": "Ce que disent nos étudiants",
+            "subtitle": "Rejoignez des milliers d'étudiants satisfaits"
+        },
+        "cta": {
+            "title": "Prêt à commencer votre apprentissage ?",
+            "subtitle": "Rejoignez CodeTunisiePro aujourd'hui et réussissez votre permis de conduire !",
+            "button": "Commencer maintenant"
+        }
+    },
+    "dashboard": {
+        "welcome_back": "Ravi de vous revoir",
+        "progress_summary": "Résumé de votre progression",
+        "tests_passed": "Tests Réussis",
+        "average_score": "Score Moyen",
+        "study_time": "Temps d'étude",
+        "recent_activity": "Activité Récente"
+    },
+    "premium": {
+        "title": "Passez au niveau Premium",
+        "subtitle": "Débloquez tout le potentiel de CodeTunisiePro et réussissez votre code de la route du premier coup.",
+        "plan_free": "Gratuit",
+        "plan_monthly": "Mensuel",
+        "plan_lifetime": "À vie",
+        "select": "Sélectionner",
+        "popular": "Populaire",
+        "best_value": "Meilleure Offre",
+        "guarantee": "Garantie de Réussite",
+        "exclusive_content": "Contenu Exclusif",
+        "no_ads": "Sans Publicité",
+        "payment_method": "Moyen de paiement",
+        "pay": "Payer",
+        "secure_payment": "Paiement 100% sécurisé SSL"
+    },
+    "courses": {
+        "title": "Cours de Code de la route",
+        "subtitle": "Parcourez nos cours complets et apprenez à votre rythme",
+        "search_placeholder": "Rechercher un cours...",
+        "category_placeholder": "Catégorie",
+        "filter_tooltip": "Filtrer par catégorie",
+        "error_loading": "Impossible de charger les cours. Veuillez réessayer plus tard.",
+        "no_courses": "Aucun cours trouvé",
+        "try_adjusting_filters": "Essayez de modifier vos filtres",
+        "stats": {
+            "available": "Cours disponibles",
+            "completed": "Cours terminés",
+            "in_progress": "En cours",
+            "global_progress": "Progression globale"
+        },
+        "back_to_list": "Retour à la liste",
+        "your_progress": "Votre progression",
+        "lessons_count": "leçons",
+        "start_course": "Commencer",
+        "continue_course": "Continuer"
+    },
+    "categories": {
+        "regles": "Règles",
+        "signalisation": "Signalisation",
+        "priorites": "Priorités",
+        "securite": "Sécurité",
+        "mecanique": "Mécanique"
+    },
+    "videos": {
+        "title": "Vidéos pédagogiques",
+        "subtitle": "Apprenez avec nos vidéos explicatives et des situations réelles",
+        "search_placeholder": "Rechercher une vidéo...",
+        "filter_tooltip": "Voir les vidéos de",
+        "error_loading": "Impossible de charger les vidéos. Veuillez réessayer plus tard.",
+        "no_videos": "Aucune vidéo trouvée",
+        "try_adjusting_search": "Essayez de modifier votre recherche",
+        "found_count": "vidéo(s) trouvée(s)",
+        "views": "vues",
+        "duration": "Durée",
+        "stats": {
+            "available": "Vidéos disponibles",
+            "completed": "Vidéos terminées",
+            "total_views": "Vues totales"
+        }
+    },
+    "tests": {
+        "title": "Tests et examens blancs",
+        "subtitle": "Testez vos connaissances et préparez-vous pour l'examen officiel",
+        "error_loading": "Impossible de charger les tests. Veuillez réessayer plus tard.",
+        "error_starting": "Impossible de démarrer le test.",
+        "empty_test": "Ce test ne contient aucune question pour le moment.",
+        "no_tests": "Aucun test disponible pour le moment.",
+        "question_progress": "Question {{current}} sur {{total}}",
+        "correct_answer_msg": "Bonne réponse !",
+        "wrong_answer_msg": "Mauvaise réponse",
+        "view_results": "Voir les résultats",
+        "congratulations": "Félicitations !",
+        "keep_trying": "Continuez vos efforts !",
+        "passed_title": "Félicitations ! Vous avez réussi !",
+        "passed_msg": "Excellent travail. Vous avez maîtrisé ce sujet.",
+        "failed_title": "Dommage, vous n'avez pas réussi.",
+        "failed_msg": "Ne vous découragez pas. Revoir vos erreurs et réessayez.",
+        "result_summary": "Vous avez répondu correctement à {{correct}} questions sur {{total}}",
+        "detailed_results": "Détail des réponses",
+        "question_template": "Question {{number}}",
+        "correct_answer_label": "Bonne réponse",
+        "correct_answer_value": "Réponse correcte : {{value}}",
+        "back_to_tests": "Retour aux tests",
+        "retry": "Recommencer",
+        "stats": {
+            "available": "Tests disponibles",
+            "passed": "Tests réussis",
+            "in_progress": "En cours",
+            "avg_score": "Score moyen",
+            "correct_answers": "Bonnes réponses",
+            "wrong_answers": "Mauvaises réponses",
+            "total_questions": "Total questions"
+        },
+        "confirm_submit_title": "Terminer le test ?",
+        "confirm_submit_msg": "Êtes-vous sûr de vouloir terminer ce test ? Vous ne pourrez plus modifier vos réponses.",
+        "confirm_quit": "Quitter le test ?",
+        "confirm_quit_msg": "Votre progression sera perdue.",
+        "overview": "Vue d'ensemble",
+        "overview_title": "Navigation des questions",
+        "overview_desc": "Accédez rapidement à n'importe quelle question du test.",
+        "next_steps": "Prochaines étapes",
+        "next_step_success": "Excellent ! Vous êtes prêt pour le niveau supérieur.",
+        "next_step_fail": "Pas d'inquiétude, la répétition est la clé du succès.",
+        "recommended_action": "Recommandé pour vous",
+        "start_next_test": "Test Suivant (Niveau Supérieur)",
+        "review_course": "Réviser le cours associé",
+        "view_full_report": "Voir le rapport détaillé",
+        "hide_full_report": "Masquer le rapport",
+        "back_to_dashboard": "Retour au tableau de bord"
+    },
+    "dashboard_page": {
+        "welcome": "Bonjour, {{name}} !",
+        "progression_subtitle": "Voici votre progression aujourd'hui",
+        "days_unit": "jours",
+        "weekly_activity": "Activité hebdomadaire",
+        "category_progress": "Progression par catégorie",
+        "recent_courses": "Cours récents",
+        "badges_earned": "Badges obtenus",
+        "earned_on": "Obtenu le",
+        "course_distribution": "Répartition des cours",
+        "stats": {
+            "courses_completed": "Cours terminés",
+            "tests_passed": "Tests réussis",
+            "avg_score": "Score moyen",
+            "current_streak": "Série actuelle"
+        },
+        "days": {
+            "mon": "Lun",
+            "tue": "Mar",
+            "wed": "Mer",
+            "thu": "Jeu",
+            "fri": "Ven",
+            "sat": "Sam",
+            "sun": "Dim"
+        },
+        "categories": {
+            "signs": "Signalisation",
+            "rules": "Règles",
+            "safety": "Sécurité",
+            "infractions": "Infractions"
+        },
+        "status": {
+            "completed": "Complétés",
+            "in_progress": "En cours",
+            "not_started": "Non commencés"
+        },
+        "recommendations": {
+            "title": "Recommandations",
+            "streak_title": "Continuer votre série !",
+            "streak_desc": "Complétez une leçon aujourd'hui pour maintenir votre série de {{count}} jours",
+            "next_step_title": "Prochaine étape",
+            "next_step_desc": "Essayez le cours 'Stationnement et arrêt' pour améliorer vos connaissances",
+            "challenge_title": "Défi du jour",
+            "challenge_desc": "Réussissez un test avec plus de 80% pour débloquer un nouveau badge"
+        }
+    },
+    "pricing": {
+        "monthly": {
+            "title": "Mensuel",
+            "duration": "1 mois",
+            "description": "Idéal pour une révision intensive",
+            "features": [
+                "Accès illimité aux 500+ questions",
+                "Cours complets du code de la route",
+                "Vidéos explicatives HD",
+                "Statistiques détaillées",
+                "Support prioritaire"
+            ]
+        },
+        "quarterly": {
+            "title": "Trimestriel",
+            "duration": "3 mois",
+            "description": "Le choix le plus populaire",
+            "badge": "Populaire",
+            "features": [
+                "Tout ce qui est inclus dans le mensuel",
+                "Accès valide pendant 90 jours",
+                "Garantie de réussite ou remboursé",
+                "Mode examen blanc illimité",
+                "Correction détaillée des fautes"
+            ]
+        },
+        "annual": {
+            "title": "Annuel",
+            "duration": "1 an",
+            "description": "Pour prendre tout son temps",
+            "badge": "Meilleure Offre",
+            "features": [
+                "Accès complet pendant 365 jours",
+                "Mises à jour gratuites du code",
+                "Tous les avantages premium",
+                "Certificat de réussite",
+                "Coaching personnalisé"
+            ]
+        }
+    },
+    "payment": {
+        "d17": {
+            "description": "Paiement mobile rapide et sécurisé"
+        },
+        "card": {
+            "name": "Carte Bancaire",
+            "description": "Visa, MasterCard, CIB"
+        }
+    },
+    "premium_page": {
+        "title": "Passez au niveau",
+        "title_highlight": "Premium",
+        "subtitle": "Débloquez tout le potentiel de CodeTunisiePro et réussissez votre code de la route du premier coup.",
+        "benefits": {
+            "guarantee_title": "Garantie de Réussite",
+            "guarantee_desc": "Nos utilisateurs premium ont un taux de réussite de 98%.",
+            "content_title": "Contenu Exclusif",
+            "content_desc": "Accès aux questions difficiles et aux pièges de l'examen.",
+            "no_ads_title": "Sans Publicité",
+            "no_ads_desc": "Une expérience d'apprentissage fluide et sans distractions."
+        },
+        "select": "Sélectionner",
+        "order_summary": "Résumé de la commande",
+        "subscription_of": "Abonnement de",
+        "payment_method": "Moyen de paiement",
+        "payment_info": "En cliquant sur confirmer, vous serez redirigé vers notre plateforme de paiement sécurisée. Aucun prélèvement automatique ne sera effectué à la fin de la période.",
+        "pay_button": "Payer",
+        "processing": "Traitement...",
+        "secure_payment": "Paiement 100% sécurisé SSL",
+        "redirecting": "Redirection vers la passerelle de paiement...",
+        "payment_success": "Paiement simulé avec succès !"
+    },
+    "profile_page": {
+        "tabs": {
+            "overview": "Vue d'ensemble",
+            "achievements": "Réalisations",
+            "history": "Historique",
+            "settings": "Paramètres",
+            "premium": "Premium"
+        },
+        "personal_info": {
+            "role_admin": "Administrateur",
+            "role_user": "Utilisateur",
+            "member_since": "Membre depuis",
+            "change_photo": "Changer la photo"
+        },
+        "actions": {
+            "edit": "Modifier",
+            "change_password": "Mot de passe",
+            "save": "Enregistrer",
+            "cancel": "Annuler",
+            "save_preferences": "Enregistrer les préférences"
+        },
+        "forms": {
+            "edit_profile_title": "Modifier le profil",
+            "edit_profile_desc": "Mettez à jour vos informations personnelles.",
+            "name": "Nom complet",
+            "phone": "Téléphone",
+            "change_password_title": "Changer le mot de passe",
+            "change_password_desc": "Assurez-vous d'utiliser un mot de passe fort et sécurisé.",
+            "current_password": "Mot de passe actuel",
+            "new_password": "Nouveau mot de passe",
+            "confirm_password": "Confirmer le mot de passe"
+        },
+        "toasts": {
+            "load_error": "Impossible de charger le profil",
+            "update_success": "Profil mis à jour avec succès",
+            "update_error": "Erreur lors de la mise à jour",
+            "password_mismatch": "Les mots de passe ne correspondent pas",
+            "password_length": "Le mot de passe doit contenir au moins 6 caractères",
+            "password_success": "Mot de passe modifié avec succès",
+            "password_error": "Erreur lors du changement de mot de passe",
+            "avatar_success": "Photo de profil mise à jour",
+            "avatar_error": "Erreur lors de l'upload"
+        },
+        "stats": {
+            "courses_completed": "Cours complétés",
+            "lessons_completed": "Leçons terminées",
+            "tests_taken": "Tests passés",
+            "total_attempts": "Total tentatives",
+            "tests_passed": "Tests réussis",
+            "rate": "Taux",
+            "avg_score": "Score Moyen",
+            "on_all_tests": "Sur tous les tests"
+        },
+        "recent_activity": {
+            "title": "Activité Récente",
+            "subtitle": "Vos 5 dernières tentatives de test",
+            "no_activity": "Aucune activité récente. Commencez un test !",
+            "test_deleted": "Test supprimé",
+            "unknown_test": "Test inconnu",
+            "general": "Général",
+            "passed": "Réussi",
+            "failed": "Échoué"
+        },
+        "achievements": {
+            "title": "Réalisations",
+            "unlocked": "débloquées",
+            "status_unlocked": "Débloqué",
+            "list": {
+                "first_step": {
+                    "name": "Premier Pas",
+                    "desc": "Complétez votre premier test"
+                },
+                "perfectionist": {
+                    "name": "Perfectionniste",
+                    "desc": "Obtenez 100% à un test"
+                },
+                "diligent": {
+                    "name": "Assidu",
+                    "desc": "Passez 10 tests"
+                },
+                "expert": {
+                    "name": "Expert",
+                    "desc": "Réussissez 20 tests"
+                },
+                "champion": {
+                    "name": "Champion",
+                    "desc": "Maintenez un taux de réussite de 80%+"
+                },
+                "determined": {
+                    "name": "Déterminé",
+                    "desc": "Complétez 5 cours"
+                }
+            }
+        },
+        "history": {
+            "title": "Historique complet",
+            "subtitle": "Tous vos résultats d'examen",
+            "no_history": "Aucun historique disponible."
+        },
+        "settings": {
+            "notifications_title": "Notifications",
+            "notifications_desc": "Gérez vos préférences de notification",
+            "email": {
+                "label": "Notifications par email",
+                "desc": "Recevez des emails pour les mises à jour importantes"
+            },
+            "reminders": {
+                "label": "Rappels de test",
+                "desc": "Recevez des rappels pour continuer votre apprentissage"
+            },
+            "progress": {
+                "label": "Mises à jour de progression",
+                "desc": "Recevez des résumés hebdomadaires de vos progrès"
+            },
+            "marketing": {
+                "label": "Emails marketing",
+                "desc": "Recevez des offres et des nouveautés"
+            }
+        },
+        "premium": {
+            "title": "Statut Premium",
+            "subtitle": "Profitez de tous les avantages premium",
+            "features": {
+                "unlimited": {
+                    "title": "Accès illimité",
+                    "desc": "Tous les cours et tests disponibles"
+                },
+                "no_ads": {
+                    "title": "Sans publicité",
+                    "desc": "Expérience d'apprentissage fluide"
+                },
+                "priority_support": {
+                    "title": "Support prioritaire",
+                    "desc": "Assistance rapide et dédiée"
+                },
+                "advanced_stats": {
+                    "title": "Statistiques avancées",
+                    "desc": "Analyses détaillées de progression"
+                }
+            },
+            "active_subscription": {
+                "title": "Abonnement actif",
+                "desc": "Renouvellement automatique"
+            }
+        }
+    }
+}
