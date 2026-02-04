@@ -65,6 +65,7 @@ export interface Question {
   image?: string;
   category?: string;
   difficulty?: string;
+  isFavorite?: boolean;
 }
 
 export interface User {

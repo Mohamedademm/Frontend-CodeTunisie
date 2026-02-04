@@ -1,4 +1,4 @@
-import { BookOpen, Video, FileText, LayoutDashboard, Settings, Menu, X, LogOut, User, Crown, Scale } from 'lucide-react';
+import { BookOpen, Video, FileText, LayoutDashboard, Settings, Menu, X, LogOut, User, Crown, Scale, Heart } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -32,6 +32,7 @@ export function Navigation() {
     { id: '/videos', label: 'Vidéos', icon: Video, requireAuth: true }, // Need to add to translation
     { id: '/tests', label: t('common.tests'), icon: FileText, requireAuth: true },
     { id: '/flashcards', label: 'Révision', icon: BookOpen, requireAuth: true },
+    { id: '/favorites', label: 'Favoris', icon: Heart, requireAuth: true },
     { id: '/dashboard', label: t('common.dashboard'), icon: LayoutDashboard, requireAuth: true },
   ];
 

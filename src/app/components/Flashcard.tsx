@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Card } from '@/app/components/ui/card';
 import { Button } from '@/app/components/ui/button';
-import { ChevronLeft, ChevronRight, RotateCw } from 'lucide-react';
+import { RotateCw } from 'lucide-react';
 
 interface FlashcardProps {
     question: string;

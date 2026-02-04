@@ -5,6 +5,17 @@ export const mockCourses: Course[] = [
     id: '1',
     title: 'Panneaux de signalisation',
     description: 'Apprenez tous les panneaux de signalisation routière tunisiens',
+    content: `
+      <h2>Introduction aux panneaux de signalisation</h2>
+      <p>La signalisation routière est composée de panneaux, de marquages au sol et de feux. Elle a pour but de rendre la circulation plus sûre et plus fluide.</p>
+      <h3>Types de panneaux</h3>
+      <ul>
+        <li><strong>Danger :</strong> Triangulaires à bord rouge</li>
+        <li><strong>Interdiction :</strong> Circulaires à bord rouge</li>
+        <li><strong>Obligation :</strong> Circulaires à fond bleu</li>
+        <li><strong>Indication :</strong> Carrés ou rectangulaires</li>
+      </ul>
+    `,
     category: 'signalisation',
     duration: '2h 30min',
     progress: 75,
@@ -16,6 +27,7 @@ export const mockCourses: Course[] = [
     id: '2',
     title: 'Règles de priorité',
     description: 'Maîtrisez les règles de priorité aux intersections',
+    content: '<p>Contenu du cours sur les règles de priorité...</p>',
     category: 'regles',
     duration: '1h 45min',
     progress: 50,
@@ -27,6 +39,7 @@ export const mockCourses: Course[] = [
     id: '3',
     title: 'Stationnement et arrêt',
     description: 'Tout savoir sur les règles de stationnement',
+    content: '<p>Contenu du cours sur le stationnement...</p>',
     category: 'regles',
     duration: '1h 20min',
     progress: 0,
@@ -38,6 +51,7 @@ export const mockCourses: Course[] = [
     id: '4',
     title: 'Infractions et sanctions',
     description: 'Connaître les infractions et leurs sanctions',
+    content: '<p>Contenu du cours sur les infractions...</p>',
     category: 'infractions',
     duration: '2h 00min',
     progress: 30,
@@ -49,6 +63,7 @@ export const mockCourses: Course[] = [
     id: '5',
     title: 'Sécurité routière',
     description: 'Les règles essentielles de sécurité sur la route',
+    content: '<p>Contenu du cours sur la sécurité routière...</p>',
     category: 'securite',
     duration: '3h 00min',
     progress: 90,
@@ -60,6 +75,7 @@ export const mockCourses: Course[] = [
     id: '6',
     title: 'Conduite de nuit',
     description: 'Techniques et précautions pour la conduite nocturne',
+    content: '<p>Contenu du cours sur la conduite de nuit...</p>',
     category: 'conseils',
     duration: '1h 30min',
     progress: 0,
@@ -71,6 +87,7 @@ export const mockCourses: Course[] = [
     id: '7',
     title: 'Conduite par mauvais temps',
     description: 'Adapter sa conduite aux conditions météorologiques',
+    content: '<p>Contenu du cours sur la conduite par mauvais temps...</p>',
     category: 'conseils',
     duration: '1h 15min',
     progress: 0,
@@ -82,6 +99,7 @@ export const mockCourses: Course[] = [
     id: '8',
     title: 'Signalisation horizontale',
     description: 'Comprendre les marquages au sol',
+    content: '<p>Contenu du cours sur la signalisation horizontale...</p>',
     category: 'signalisation',
     duration: '1h 00min',
     progress: 100,
@@ -240,6 +258,7 @@ export const mockQuestions: Question[] = [
     ],
     correctAnswer: 1,
     explanation: 'Les panneaux triangulaires à bordure rouge signalent un danger.',
+    isFavorite: true,
   },
   {
     id: '2',
@@ -272,6 +291,8 @@ export const mockUser: User = {
   name: 'Ahmed Ben Salem',
   email: 'ahmed.bensalem@example.com',
   avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200',
+  role: 'user',
+  isPremium: true,
   coursesCompleted: 5,
   testsCompleted: 12,
   totalScore: 82,

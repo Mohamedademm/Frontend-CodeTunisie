@@ -37,6 +37,7 @@ import { PaymentManagement } from '@/app/components/admin/PaymentManagement';
 import { NotificationCenter } from '@/app/components/admin/NotificationCenter';
 import { SiteSettings } from '@/app/components/admin/SiteSettings';
 import { FlashcardsPage } from '@/app/components/FlashcardsPage';
+import { FavoritesPage } from '@/app/components/FavoritesPage';
 
 // Layout wrapper for authenticated pages
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -155,6 +156,17 @@ export default function App() {
                   <ProtectedRoute>
                     <MainLayout>
                       <FlashcardsPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/favorites"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <FavoritesPage />
                     </MainLayout>
                   </ProtectedRoute>
                 }
