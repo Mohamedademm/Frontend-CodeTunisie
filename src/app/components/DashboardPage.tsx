@@ -7,6 +7,7 @@ import { mockUser, mockCourses } from '@/app/data/mockData';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 import { useTranslation } from 'react-i18next';
+import { BadgesList } from '@/app/components/BadgesList';
 
 export function DashboardPage() {
   const { t } = useTranslation();
@@ -248,22 +249,7 @@ export function DashboardPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {mockUser.badges.map((badge) => (
-                      <div key={badge.id} className="flex items-start gap-3 p-3 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 rounded-lg border border-yellow-100 dark:border-yellow-900/30">
-                        <div className="p-2 bg-yellow-400 rounded-lg">
-                          <Award className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold dark:text-white">{badge.name}</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{badge.description}</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                            {t('dashboard_page.earned_on')} {new Date(badge.earnedDate).toLocaleDateString('fr-FR')}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <BadgesList earnedBadges={mockUser.badges} />
                 </CardContent>
               </Card>
             </motion.div>

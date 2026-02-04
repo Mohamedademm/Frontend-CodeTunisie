@@ -302,6 +302,65 @@ export const mockUser: User = {
   currentStreak: 7,
 };
 
+export const availableBadges: Badge[] = [
+  {
+    id: '1',
+    name: 'Premier pas',
+    icon: 'award',
+    description: 'Terminer votre premier cours',
+    category: 'learning'
+  },
+  {
+    id: '2',
+    name: 'Expert signalisation',
+    icon: 'traffic-cone',
+    description: 'Réussir tous les tests de signalisation',
+    category: 'achievement'
+  },
+  {
+    id: '3',
+    name: 'Série de 7',
+    icon: 'flame',
+    description: '7 jours consécutifs d\'apprentissage',
+    category: 'streak'
+  },
+  {
+    id: '4',
+    name: 'Code Master',
+    icon: 'crown',
+    description: 'Obtenir 100% à un examen blanc',
+    category: 'achievement'
+  },
+  {
+    id: '5',
+    name: 'Marathonien',
+    icon: 'timer',
+    description: 'Étudier pendant plus de 10 heures au total',
+    category: 'dedication'
+  },
+  {
+    id: '6',
+    name: 'Sans faute',
+    icon: 'shield-check',
+    description: 'Réussir 5 tests sans aucune erreur',
+    category: 'mastery'
+  },
+  {
+    id: '7',
+    name: 'Explorateur',
+    icon: 'compass',
+    description: 'Consulter toutes les catégories de cours',
+    category: 'learning'
+  },
+  {
+    id: '8',
+    name: 'Communauté',
+    icon: 'users',
+    description: 'Participer au forum ou inviter un ami',
+    category: 'social'
+  }
+];
+
 export const mockTestimonials: Testimonial[] = [
   {
     id: '1',
