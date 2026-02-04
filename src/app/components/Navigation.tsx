@@ -31,6 +31,7 @@ export function Navigation() {
     { id: '/law', label: t('common.courses') === 'Cours & Vidéos' ? 'Loi' : (t('common.courses') === 'الدروس والفيديوهات' ? 'مجلة الطرقات' : 'Law'), icon: Scale, requireAuth: true },
     { id: '/videos', label: 'Vidéos', icon: Video, requireAuth: true }, // Need to add to translation
     { id: '/tests', label: t('common.tests'), icon: FileText, requireAuth: true },
+    { id: '/flashcards', label: 'Révision', icon: BookOpen, requireAuth: true },
     { id: '/dashboard', label: t('common.dashboard'), icon: LayoutDashboard, requireAuth: true },
   ];
 

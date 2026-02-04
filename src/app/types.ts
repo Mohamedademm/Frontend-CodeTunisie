@@ -88,7 +88,8 @@ export interface Badge {
   name: string;
   icon: string;
   description: string;
-  earnedDate: string;
+  earnedDate?: string;
+  category?: string;
 }
 
 export interface Testimonial {
