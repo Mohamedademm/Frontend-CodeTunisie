@@ -5,29 +5,32 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Alert, AlertDescription } from '@/app/components/ui/alert';
 import { motion } from 'motion/react';
-import { Mail, Lock, Chrome, AlertCircle, Car } from 'lucide-react';
+import { Mail, Lock, Chrome, Car } from 'lucide-react';
 import { API_BASE_URL } from '@/services/api';
+import { toast } from 'sonner';
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
         setIsLoading(true);
 
         try {
             await login({ email, password });
+            toast.success('Connexion réussie !', {
+                description: 'Bienvenue sur CodeTunisiePro'
+            });
             navigate('/dashboard');
         } catch (err: any) {
-            setError(err.message || 'Login failed. Please check your credentials.');
+            toast.error('Erreur de connexion', {
+                description: err.message || 'Vérifiez vos identifiants et réessayez.'
+            });
         } finally {
             setIsLoading(false);
         }
@@ -72,12 +75,6 @@ export const LoginPage: React.FC = () => {
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            {error && (
-                                <Alert variant="destructive">
-                                    <AlertCircle className="h-4 w-4" />
-                                    <AlertDescription>{error}</AlertDescription>
-                                </Alert>
-                            )}
 
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
