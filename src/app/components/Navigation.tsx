@@ -68,6 +68,10 @@ export function Navigation() {
               onClick={() => handleNavigate('/')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              role="button"
+              tabIndex={0}
+              aria-label="CodeTunisiePro Accueil"
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleNavigate('/')}
             >
               <div className="w-10 h-10 rounded-xl overflow-hidden shadow-colored group-hover:shadow-lg transition-all">
                 <img
@@ -98,7 +102,8 @@ export function Navigation() {
                       <Button
                         variant={isActive ? 'default' : 'ghost'}
                         onClick={() => handleNavigate(item.id)}
-                        className="gap-2 transition-all"
+                        className="gap-2 transition-all rtl:flex-row-reverse"
+                        aria-current={isActive ? 'page' : undefined}
                       >
                         <Icon className="w-4 h-4" />
                         {item.label}
@@ -135,8 +140,8 @@ export function Navigation() {
                   {user?.role === 'admin' && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button variant="outline" onClick={() => handleNavigate('/admin/dashboard')}>
-                          <Settings className="w-4 h-4 mr-2" />
+                        <Button variant="outline" onClick={() => handleNavigate('/admin/dashboard')} aria-label={t('common.admin')}>
+                          <Settings className="w-4 h-4 me-2 rtl:ms-2" />
                           {t('common.admin')}
                         </Button>
                       </TooltipTrigger>
@@ -153,6 +158,9 @@ export function Navigation() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="cursor-pointer"
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Menu utilisateur"
                       >
                         <Avatar className="w-10 h-10 border-2 border-primary">
                           <AvatarImage src={user?.avatar} alt={user?.name} />
@@ -165,24 +173,24 @@ export function Navigation() {
                     <DropdownMenuContent align="end" className="w-56">
                       <DropdownMenuLabel>
                         <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium">{user?.name}</p>
-                          <p className="text-xs text-muted-foreground">{user?.email}</p>
+                          <p className="text-sm font-medium text-start">{user?.name}</p>
+                          <p className="text-xs text-muted-foreground text-start">{user?.email}</p>
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => handleNavigate('/profile')}>
-                        <User className="mr-2 h-4 w-4" />
+                      <DropdownMenuItem onClick={() => handleNavigate('/profile')} className="flex items-center gap-2">
+                        <User className="w-4 h-4" />
                         <span>Mon profil</span>
                       </DropdownMenuItem>
                       {!user?.isPremium && (
-                        <DropdownMenuItem onClick={() => handleNavigate('/premium')}>
-                          <Crown className="mr-2 h-4 w-4" />
+                        <DropdownMenuItem onClick={() => handleNavigate('/premium')} className="flex items-center gap-2">
+                          <Crown className="w-4 h-4" />
                           <span>Passer à Premium</span>
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-                        <LogOut className="mr-2 h-4 w-4" />
+                      <DropdownMenuItem onClick={handleLogout} className="text-red-600 flex items-center gap-2">
+                        <LogOut className="w-4 h-4" />
                         <span>{t('common.logout')}</span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -212,6 +220,7 @@ export function Navigation() {
                 size="icon"
                 className="md:hidden"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Menu principal"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>

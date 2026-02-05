@@ -227,7 +227,13 @@ export function ProfilePage() {
                             <div className="flex flex-col sm:flex-row items-center sm:items-end -mt-20 sm:ml-8 mb-6 gap-6">
                                 <div className="relative group">
                                     <Avatar className="w-40 h-40 border-4 border-white dark:border-gray-800 shadow-2xl ring-4 ring-blue-100 dark:ring-blue-900">
-                                        <AvatarImage src={profile.avatar} alt={profile.name} />
+                                        <AvatarImage
+                                            src={profile.avatar?.startsWith('/uploads')
+                                                ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}${profile.avatar}`
+                                                : profile.avatar
+                                            }
+                                            alt={profile.name}
+                                        />
                                         <AvatarFallback className="text-3xl bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                                             {profile.name.charAt(0).toUpperCase()}
                                         </AvatarFallback>

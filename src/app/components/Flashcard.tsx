@@ -13,8 +13,22 @@ interface FlashcardProps {
 export function Flashcard({ question, answer, category }: FlashcardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsFlipped(!isFlipped);
+        }
+    };
+
     return (
-        <div className="perspective-1000 w-full max-w-md mx-auto h-64 cursor-pointer" onClick={() => setIsFlipped(!isFlipped)}>
+        <div
+            className="perspective-1000 w-full max-w-md mx-auto h-64 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary rounded-xl"
+            onClick={() => setIsFlipped(!isFlipped)}
+            onKeyDown={handleKeyDown}
+            role="button"
+            tabIndex={0}
+            aria-label={`Carte flash: ${question}. Cliquez pour retourner.`}
+        >
             <motion.div
                 initial={false}
                 animate={{ rotateY: isFlipped ? 180 : 0 }}

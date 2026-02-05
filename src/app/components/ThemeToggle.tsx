@@ -28,6 +28,7 @@ export function ThemeToggle() {
       size="icon"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="relative overflow-hidden"
+      aria-label="Changer le thème"
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
