@@ -367,7 +367,7 @@ export function TestTakingPage() {
                                 <Badge variant="outline" className="capitalize">{questions[currentQuestionIndex].category}</Badge>
                             </div>
 
-                            <h2 className="text-2xl md:text-3xl font-bold dark:text-white leading-tight">
+                            <h2 dir="auto" className="text-2xl md:text-3xl font-bold dark:text-white leading-tight">
                                 {question.question}
                             </h2>
 
@@ -390,7 +390,7 @@ export function TestTakingPage() {
                                             whileHover={{ scale: 1.02, backgroundColor: isSelected ? undefined : "rgba(59, 130, 246, 0.05)" }}
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleAnswerSelect(idx)}
-                                            className={`text-left p-6 rounded-xl border-2 transition-all duration-200 text-lg group flex items-start gap-4 w-full ${isSelected
+                                            className={`text-start p-6 rounded-xl border-2 transition-all duration-200 text-lg group flex items-start gap-4 w-full ${isSelected
                                                 ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-400 dark:text-white shadow-md'
                                                 : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-gray-200 hover:border-blue-300 dark:hover:border-blue-500'
                                                 }`}
@@ -399,7 +399,7 @@ export function TestTakingPage() {
                                                 }`}>
                                                 {isSelected && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2.5 h-2.5 bg-white rounded-full" />}
                                             </div>
-                                            <span>{option}</span>
+                                            <span dir="auto" className="w-full">{option}</span>
                                         </motion.button>
                                     );
                                 })}

@@ -81,6 +81,7 @@ export interface User {
   totalScore: number;
   badges: Badge[];
   joinedDate: string;
+  createdAt: string;
   currentStreak: number;
 }
 

@@ -41,6 +41,11 @@ export const adminService = {
         return response.data.users;
     },
 
+    async createUser(userData: Partial<UserProfile> & { password?: string }): Promise<UserProfile> {
+        const response = await api.post('/admin/users', userData);
+        return response.data.user;
+    },
+
     async updateUser(userId: string, userData: Partial<UserProfile>): Promise<UserProfile> {
         const response = await api.put(`/admin/users/${userId}`, userData);
         return response.data.user;

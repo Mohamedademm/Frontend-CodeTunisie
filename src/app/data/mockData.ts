@@ -424,6 +424,7 @@ export const courseCategories = [
   { value: 'infractions', label: 'Infractions' },
   { value: 'securite', label: 'Sécurité' },
   { value: 'conseils', label: 'Conseils de conduite' },
+  { value: 'poids-lourd', label: 'Poids Lourd (C+E)' },
 ];
 
 export const videoCategories = [
