@@ -168,4 +168,20 @@ export const adminService = {
         const response = await api.put('/admin/settings', settings);
         return response.data.settings;
     },
+
+    // Image Upload for Questions
+    async uploadQuestionImage(formData: FormData): Promise<{ success: boolean; message: string; data: { url: string; filename: string; size: number; uploadedAt: Date } }> {
+        const response = await api.post('/admin/upload-question-image', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    },
+
+    async deleteQuestionImage(filename: string): Promise<void> {
+        await api.delete(`/admin/delete-question-image/${filename}`);
+    },
 };
+
+export default adminService;

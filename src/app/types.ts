@@ -36,7 +36,7 @@ export interface Test {
   description: string;
   difficulty: string;
   duration: number;
-  questions: number | Question[];
+  questions: number | Question[] | string[];
   progress?: number;
   category: string;
   passed?: boolean;
