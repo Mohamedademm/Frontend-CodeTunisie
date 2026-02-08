@@ -117,7 +117,7 @@ export default function ImageUploader({ onImageUploaded, currentImage, onImageRe
             {preview ? (
                 <div className="relative group">
                     <img
-                        src={preview.startsWith('data:') || preview.startsWith('http') || preview.startsWith('blob:') ? preview : `http://localhost:5000${preview}`}
+                        src={preview.startsWith('data:') || preview.startsWith('http') || preview.startsWith('blob:') ? preview : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${preview}`}
                         alt="Preview"
                         className="w-full h-48 object-contain rounded-lg border-2 border-border bg-muted"
                         onError={(e) => {

@@ -57,7 +57,7 @@ export default function QuestionPreview({
                 {image?.url && (
                     <div className="rounded-lg overflow-hidden border">
                         <img
-                            src={image.url.startsWith('http') ? image.url : `http://localhost:5000${image.url}`}
+                            src={image.url.startsWith('http') ? image.url : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${image.url}`}
                             alt="Question"
                             className="w-full h-48 object-contain bg-muted"
                             onError={(e) => {

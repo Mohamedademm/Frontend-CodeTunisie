@@ -377,7 +377,13 @@ export function TestTakingPage() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     className="rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700"
                                 >
-                                    <img src={question.image} alt="Question context" className="w-full h-auto max-h-64 object-cover" />
+                                    <img
+                                        src={question.image.startsWith('http')
+                                            ? question.image
+                                            : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${question.image.startsWith('/') ? '' : '/'}${question.image}`}
+                                        alt="Question context"
+                                        className="w-full h-auto max-h-64 object-cover"
+                                    />
                                 </motion.div>
                             )}
 
