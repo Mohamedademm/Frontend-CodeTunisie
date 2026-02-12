@@ -46,8 +46,8 @@ export function TestsPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('tests.title')}</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('tests.title')}</h1>
+          <p className="text-base sm:text-xl text-gray-600 dark:text-gray-400">
             {t('tests.subtitle')}
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export function TestsPage() {
             )}
 
             {/* Test Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {tests.map((test, index) => (
                 <motion.div
                   key={test.id}

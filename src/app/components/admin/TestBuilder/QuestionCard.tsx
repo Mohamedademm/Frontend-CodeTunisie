@@ -17,7 +17,7 @@ export interface QuestionData {
     explanation: string;
     category: string;
     difficulty: string;
-    image?: {
+    image?: string | {
         url: string;
         filename: string;
         size: number;
@@ -140,7 +140,7 @@ export default function QuestionCard({
                         options={data.options}
                         correctAnswer={data.correctAnswer}
                         explanation={data.explanation}
-                        image={data.image}
+                        image={typeof data.image === 'string' ? { url: data.image } : data.image}
                         category={data.category}
                         difficulty={data.difficulty}
                     />
@@ -163,7 +163,7 @@ export default function QuestionCard({
 
                         {/* Image upload */}
                         <ImageUploader
-                            currentImage={data.image}
+                            currentImage={typeof data.image === 'string' ? { url: data.image, filename: '' } : data.image}
                             onImageUploaded={(imageData) => handleChange('image', imageData)}
                             onImageRemoved={() => handleChange('image', undefined)}
                         />

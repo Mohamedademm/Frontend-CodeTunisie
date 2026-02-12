@@ -245,7 +245,7 @@ export function ProfilePage() {
                                 </div>
 
                                 <div className="flex-1 text-center sm:text-left mb-4">
-                                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{profile.name}</h1>
+                                    <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">{profile.name}</h1>
                                     <p className="text-gray-600 dark:text-gray-400 mb-3">{profile.email}</p>
                                     <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
                                         <Badge variant={profile.role === 'admin' ? 'destructive' : 'secondary'} className="text-sm px-3 py-1">

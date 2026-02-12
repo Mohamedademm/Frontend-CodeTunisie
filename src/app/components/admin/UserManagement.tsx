@@ -207,7 +207,7 @@ export function UserManagement() {
     }, [users]);
 
     return (
-        <div className="space-y-6 animate-fade-in pt-[10%]">
+        <div className="space-y-6 animate-fade-in">
             {/* Stats Cards - kept same as before */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-100 dark:border-blue-800">
@@ -301,7 +301,7 @@ export function UserManagement() {
                     </div>
 
                     {/* Table */}
-                    <div className="rounded-md border">
+                    <div className="rounded-md border overflow-x-auto">
                         <Table>
                             <TableHeader>
                                 <TableRow className="bg-muted/50">
@@ -418,8 +418,8 @@ export function UserManagement() {
                     </div>
 
                     {/* Pagination */}
-                    <div className="flex items-center justify-between mt-4">
-                        <div className="text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row items-center justify-between mt-4 gap-4">
+                        <div className="text-sm text-muted-foreground text-center sm:text-left">
                             Affichage de <strong>{(currentPage - 1) * itemsPerPage + 1}</strong> à <strong>{Math.min(currentPage * itemsPerPage, filteredUsers.length)}</strong> sur <strong>{filteredUsers.length}</strong>
                         </div>
                         <div className="flex items-center gap-2">

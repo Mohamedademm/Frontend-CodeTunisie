@@ -7,7 +7,7 @@ interface QuestionPreviewProps {
     options: string[];
     correctAnswer: number; // Changed to number (index)
     explanation?: string;
-    image?: { url: string };
+    image?: string | { url: string };
     category?: string;
     difficulty?: string;
 }
@@ -54,19 +54,39 @@ export default function QuestionPreview({
                 </div>
 
                 {/* Image if present */}
-                {image?.url && (
-                    <div className="rounded-lg overflow-hidden border">
-                        <img
-                            src={image.url.startsWith('http') ? image.url : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${image.url}`}
-                            alt="Question"
-                            className="w-full h-48 object-contain bg-muted"
-                            onError={(e) => {
-                                // Fallback if image fails to load
-                                e.currentTarget.style.display = 'none';
-                            }}
-                        />
-                    </div>
-                )}
+                {/* Image if present */}
+                {(() => {
+                    const img = image;
+                    if (!img) return null;
+
+                    const rawUrl = typeof img === 'string' ? img : img.url;
+                    if (!rawUrl || rawUrl.trim() === '') return null;
+
+                    let finalUrl = rawUrl;
+                    if (!rawUrl.startsWith('http') && !rawUrl.startsWith('data:') && !rawUrl.startsWith('blob:')) {
+                        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+                        let baseUrl = apiBase;
+                        try {
+                            baseUrl = new URL(apiBase).origin;
+                        } catch (e) {
+                            baseUrl = apiBase.replace(/\/api\/?$/, '');
+                        }
+                        finalUrl = `${baseUrl}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+                    }
+
+                    return (
+                        <div className="rounded-lg overflow-hidden border">
+                            <img
+                                src={finalUrl}
+                                alt="Question"
+                                className="w-full h-48 object-contain bg-muted"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                }}
+                            />
+                        </div>
+                    );
+                })()}
 
                 {/* Options */}
                 <div className="space-y-2">

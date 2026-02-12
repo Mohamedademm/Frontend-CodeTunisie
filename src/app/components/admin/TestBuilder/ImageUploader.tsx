@@ -117,7 +117,20 @@ export default function ImageUploader({ onImageUploaded, currentImage, onImageRe
             {preview ? (
                 <div className="relative group">
                     <img
-                        src={preview.startsWith('data:') || preview.startsWith('http') || preview.startsWith('blob:') ? preview : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${preview}`}
+                        src={(() => {
+                            if (preview.startsWith('data:') || preview.startsWith('http') || preview.startsWith('blob:')) return preview;
+
+                            // Extract origin from API_BASE_URL (remove /api if present)
+                            const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+                            let baseUrl = apiBase;
+                            try {
+                                baseUrl = new URL(apiBase).origin;
+                            } catch (e) {
+                                baseUrl = apiBase.replace(/\/api\/?$/, '');
+                            }
+
+                            return `${baseUrl}${preview.startsWith('/') ? '' : '/'}${preview}`;
+                        })()}
                         alt="Preview"
                         className="w-full h-48 object-contain rounded-lg border-2 border-border bg-muted"
                         onError={(e) => {

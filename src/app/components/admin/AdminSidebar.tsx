@@ -52,7 +52,8 @@ export function AdminSidebar({ isOpen, onToggle }: AdminSidebarProps) {
                 animate={{ width: isOpen ? 256 : 80 }}
                 className={cn(
                     "fixed left-0 top-0 h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 z-50",
-                    "transition-all duration-300 overflow-hidden"
+                    "transition-all duration-300 overflow-hidden",
+                    !isOpen && "max-lg:-translate-x-full"
                 )}
             >
                 {/* Logo Section */}

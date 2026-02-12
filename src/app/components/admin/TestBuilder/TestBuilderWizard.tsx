@@ -230,13 +230,20 @@ export default function TestBuilderWizard({
                     explanation: question.explanation,
                     category: question.category,
                     difficulty: question.difficulty,
-                    image: question.image?.url ?? '',
+                    image: typeof question.image === 'object' && question.image !== null
+                        ? question.image
+                        : (question.image && typeof question.image === 'string' && question.image !== '[object Object]'
+                            ? { url: question.image }
+                            : { url: '' }),
                 };
 
                 let savedQuestion;
-                if (mode === 'edit' && question.id) {
+                const hasExistingId = mode === 'edit' && question.id && question.id.length > 0;
+                console.log(`Question ${question.question?.substring(0, 20)}... - ID: ${question.id}, hasExistingId: ${hasExistingId}`);
+
+                if (hasExistingId) {
                     // Update existing question
-                    savedQuestion = await adminService.updateQuestion(question.id, questionPayload);
+                    savedQuestion = await adminService.updateQuestion(question.id!, questionPayload);
                 } else {
                     // Create new question
                     savedQuestion = await adminService.createQuestion(questionPayload);
@@ -336,8 +343,8 @@ export default function TestBuilderWizard({
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
-            <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-                <DialogHeader className="flex flex-row items-center justify-between">
+            <DialogContent className="max-w-[95vw] w-[1400px] h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
+                <DialogHeader className="flex flex-row items-center justify-between px-6 py-4 border-b shrink-0">
                     <div>
                         <DialogTitle>{mode === 'edit' ? 'Modifier le Test' : 'Créer un Test Complet'}</DialogTitle>
                         <DialogDescription>
@@ -384,7 +391,7 @@ export default function TestBuilderWizard({
                 </DialogHeader>
 
                 {/* Stepper */}
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-between px-6 py-4 bg-muted/30 border-b shrink-0">
                     {steps.map((step, index) => (
                         <div key={step.number} className="flex items-center flex-1">
                             <div className="flex flex-col items-center flex-1">
@@ -423,7 +430,7 @@ export default function TestBuilderWizard({
                 </div>
 
                 {/* Step Content */}
-                <div className="min-h-[400px]">
+                <div className="flex-1 overflow-y-auto p-6">
                     {currentStep === 1 && (
                         <div className="animate-in fade-in-0 slide-in-from-right-5 duration-300">
                             <Step1TestInfo data={testInfo} onChange={setTestInfo} />
@@ -453,7 +460,7 @@ export default function TestBuilderWizard({
                 </div>
 
                 {/* Navigation Footer */}
-                <div className="flex justify-between pt-6 border-t">
+                <div className="flex justify-between px-6 py-4 border-t bg-muted/20 shrink-0">
                     <Button
                         type="button"
                         variant="outline"

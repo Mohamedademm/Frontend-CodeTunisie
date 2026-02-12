@@ -54,7 +54,7 @@ export function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
             >
-                <h1 className="text-3xl font-bold  dark:text-white">
+                <h1 className="text-2xl sm:text-3xl font-bold  dark:text-white">
                     Tableau de bord
                 </h1>
                 <p className="text-muted-foreground mt-1">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ArrowLeft, CheckCircle, XCircle, RotateCcw, Clock, Save, Home, LayoutGrid } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, XCircle, RotateCcw, Clock, Save, Home, LayoutGrid, AlertCircle } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Progress } from '@/app/components/ui/progress';
 import { Card, CardContent } from '@/app/components/ui/card';
@@ -371,21 +371,65 @@ export function TestTakingPage() {
                                 {question.question}
                             </h2>
 
-                            {question.image && (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700"
-                                >
-                                    <img
-                                        src={question.image.startsWith('http')
-                                            ? question.image
-                                            : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${question.image.startsWith('/') ? '' : '/'}${question.image}`}
-                                        alt="Question context"
-                                        className="w-full h-auto max-h-64 object-cover"
-                                    />
-                                </motion.div>
-                            )}
+                            {(() => {
+                                const img = question.image;
+                                if (!img) return null;
+
+                                // Robust handling for potential string 'undefined' or '[object Object]' or null/empty
+                                const rawUrl = typeof img === 'string' ? img : img.url;
+
+                                // If URL is empty, no image was uploaded - just hide
+                                if (!rawUrl || rawUrl.trim() === '' || rawUrl === 'undefined') {
+                                    return null;
+                                }
+
+                                // If URL is corrupted ([object Object]), show error to prompt re-upload
+                                if (rawUrl === '[object Object]') {
+                                    return (
+                                        <div className="rounded-xl p-8 border-2 border-dashed border-red-300 bg-red-50 dark:bg-red-900/10 flex flex-col items-center justify-center text-red-500 gap-2">
+                                            <AlertCircle className="w-8 h-8" />
+                                            <p className="font-semibold">Image non valide</p>
+                                            <p className="text-xs">Veuillez ré-uploader l'image dans l'éditeur</p>
+                                        </div>
+                                    );
+                                }
+
+                                let finalUrl = rawUrl;
+                                if (!rawUrl.startsWith('http') && !rawUrl.startsWith('data:') && !rawUrl.startsWith('blob:')) {
+                                    // Extract origin from API_BASE_URL (remove /api if present)
+                                    const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+                                    let baseUrl = apiBase;
+                                    try {
+                                        baseUrl = new URL(apiBase).origin;
+                                    } catch (e) {
+                                        baseUrl = apiBase.replace(/\/api\/?$/, '');
+                                    }
+                                    finalUrl = `${baseUrl}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+                                }
+
+                                return (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700"
+                                    >
+                                        <img
+                                            src={finalUrl}
+                                            alt="Question context"
+                                            className="w-full h-auto max-h-64 object-cover"
+                                            onError={(e) => {
+                                                console.error('❌ Image Load Error:', e.currentTarget.src);
+                                                // Show fallback on error
+                                                e.currentTarget.style.display = 'none';
+                                                e.currentTarget.parentElement?.classList.add('bg-gray-100', 'flex', 'items-center', 'justify-center', 'h-48');
+                                                if (e.currentTarget.parentElement) {
+                                                    e.currentTarget.parentElement.innerHTML = '<div class="text-center text-gray-400"><svg class="w-8 h-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Image non disponible</div>';
+                                                }
+                                            }}
+                                        />
+                                    </motion.div>
+                                );
+                            })()}
 
                             <div className="grid gap-4">
                                 {question.options.map((option, idx) => {

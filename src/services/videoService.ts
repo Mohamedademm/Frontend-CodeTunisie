@@ -25,7 +25,9 @@ export const videoService = {
             progress: 0,
             thumbnail: video.thumbnail || video.imageUrl || '', // Handle different field names
             url: video.videoUrl || video.url || '',
-            views: video.viewCount || 0
+            videoType: video.videoType || 'url',
+            views: video.viewCount || 0,
+            isPremium: video.isPremium || false
         }));
     },
 

@@ -50,10 +50,10 @@ export function DashboardPage() {
             <img
               src={mockUser.avatar}
               alt={mockUser.name}
-              className="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg"
+              className="w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg"
             />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                 {t('dashboard_page.welcome', { name: mockUser.name.split(' ')[0] })}
               </h1>
               <p className="text-gray-600 dark:text-gray-400">{t('dashboard_page.progression_subtitle')}</p>
@@ -79,7 +79,7 @@ export function DashboardPage() {
                     </Badge>
                     <span className="text-blue-100 text-sm">Apprenti Conducteur</span>
                   </div>
-                  <h3 className="text-3xl font-bold mb-1">9,450 XP</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-1">9,450 XP</h3>
                   <p className="text-blue-100 text-sm mb-4">550 XP avant le niveau suivant</p>
                   <div className="w-full bg-blue-900/40 rounded-full h-2 mb-1">
                     <div className="bg-white rounded-full h-2" style={{ width: '75%' }}></div>
@@ -159,7 +159,7 @@ export function DashboardPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
+                  <ResponsiveContainer width="100%" height={200}>
                     <BarChart data={weeklyActivity}>
                       <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                       <XAxis dataKey="day" className="text-xs fill-gray-600 dark:fill-gray-400" />

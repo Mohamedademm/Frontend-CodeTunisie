@@ -84,7 +84,7 @@ export function Navigation() {
                   }}
                 />
               </div>
-              <span className="text-xl bg-clip-text ">
+              <span className="text-xl bg-clip-text hidden sm:inline">
                 CodeTunisiePro
               </span>
             </motion.div>

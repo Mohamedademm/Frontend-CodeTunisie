@@ -82,13 +82,19 @@ export const adminService = {
         return response.data.videos;
     },
 
-    async createVideo(videoData: Partial<Video>): Promise<Video> {
-        const response = await api.post('/videos', videoData);
+    async createVideo(videoData: Partial<Video> | FormData): Promise<Video> {
+        const isFormData = videoData instanceof FormData;
+        const response = await api.post('/videos', videoData, isFormData ? {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        } : undefined);
         return response.data.video;
     },
 
-    async updateVideo(videoId: string, videoData: Partial<Video>): Promise<Video> {
-        const response = await api.put(`/videos/${videoId}`, videoData);
+    async updateVideo(videoId: string, videoData: Partial<Video> | FormData): Promise<Video> {
+        const isFormData = videoData instanceof FormData;
+        const response = await api.put(`/videos/${videoId}`, videoData, isFormData ? {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        } : undefined);
         return response.data.video;
     },
 
@@ -98,16 +104,13 @@ export const adminService = {
 
     // Test Management
     async getTests(): Promise<Test[]> {
-        // Use admin endpoint if exists or public one. Public one at /api/tests supports filters. 
-        // Let's use /api/tests but we want ALL tests.
-        // Backend /api/tests filters by isPublished=true by default.
-        // We might need to update backend to allow admins to see all, OR use /api/tests/all if it existed.
-        // For now, let's assume /api/tests returns what we need or we add a param.
-        // Actually, backend routes/tests.js: const filter = { isPublished: true }; is hardcoded.
-        // I might need to fix filter in tests.js too if I want admins to see drafts.
-        // But for now, let's just use /tests.
         const response = await api.get('/tests');
         return response.data.tests;
+    },
+
+    async getTestById(id: string): Promise<Test> {
+        const response = await api.get(`/tests/${id}`);
+        return response.data.test;
     },
 
     async createTest(testData: Partial<Test>): Promise<Test> {

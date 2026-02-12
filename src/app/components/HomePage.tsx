@@ -21,10 +21,10 @@ export function HomePage() {
     {
       icon: Scale,
       title: t('common.courses') === 'Cours & Vidéos' ? 'Code de la Route' : (t('common.courses') === 'الدروس والفيديوهات' ? 'مجلة الطرقات' : 'Traffic Law'),
-      description: t('common.courses') === 'Cours & Vidéos' 
-        ? 'Consultez tous les articles du code de la route tunisien avec un assistant IA' 
-        : (t('common.courses') === 'الدروس والفيديوهات' 
-          ? 'تصفح جميع فصول مجلة الطرقات التونسية مع مساعد ذكي' 
+      description: t('common.courses') === 'Cours & Vidéos'
+        ? 'Consultez tous les articles du code de la route tunisien avec un assistant IA'
+        : (t('common.courses') === 'الدروس والفيديوهات'
+          ? 'تصفح جميع فصول مجلة الطرقات التونسية مع مساعد ذكي'
           : 'Browse all Tunisian traffic law articles with AI assistant'),
       gradient: 'gradient-secondary',
       link: '/law',
@@ -71,7 +71,7 @@ export function HomePage() {
       <section className="relative overflow-hidden gradient-primary text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -139,7 +139,7 @@ export function HomePage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute -bottom-6 -left-6 bg-white dark:bg-card rounded-2xl p-4 shadow-xl"
+                className="absolute -bottom-6 -left-6 bg-white dark:bg-card rounded-2xl p-4 shadow-xl hidden sm:block"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center">
@@ -201,7 +201,7 @@ export function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const cardContent = (
@@ -224,7 +224,7 @@ export function HomePage() {
                   </CardContent>
                 </Card>
               );
-              
+
               return (
                 <motion.div
                   key={index}

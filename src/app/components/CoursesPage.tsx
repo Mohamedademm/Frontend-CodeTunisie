@@ -53,9 +53,9 @@ export function CoursesPage() {
           >
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="w-8 h-8 text-primary" />
-              <h1 className="text-4xl font-bold text-foreground">{t('courses.title')}</h1>
+              <h1 className="text-2xl sm:text-4xl font-bold text-foreground">{t('courses.title')}</h1>
             </div>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-base sm:text-xl text-muted-foreground">
               {t('courses.subtitle')}
             </p>
           </motion.div>

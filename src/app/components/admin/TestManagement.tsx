@@ -72,48 +72,41 @@ export function TestManagement() {
         }
     };
 
-    const handleEdit = (item: any) => {
+    const handleEdit = async (item: any) => {
         if (activeTab === 'tests') {
-            // Prepared data for Test Builder Wizard
-            let testQuestions = item.questions || [];
+            try {
+                // Fetch full test details to ensure we have all questions and correct data
+                const fullTest = await adminService.getTestById(item.id || item._id);
 
-            // Map question IDs/Objects to full QuestionData objects
-            const fullQuestions = testQuestions.map((q: any) => {
-                // Determine ID (string or object)
-                const qId = typeof q === 'string' ? q : (q.id || q._id);
+                // Prepared data for Test Builder Wizard
+                const testQuestions = Array.isArray(fullTest.questions) ? fullTest.questions : [];
 
-                // Find full question object from state if we only have ID
-                // First try to use the object itself if provided
-                let fullQ = typeof q === 'object' ? q : undefined;
+                // Map question objects to full QuestionData objects
+                const fullQuestionsData = testQuestions.map((q: any) => {
+                    // Normalize question object (handle if it's just an ID - though getTestById should populate)
+                    if (typeof q === 'string') return null; // Should be populated
 
-                // If not an object or incomplete, look up by ID
-                if (!fullQ && qId) {
-                    fullQ = questions.find(kq => (kq.id || kq._id) === qId);
-                }
+                    return {
+                        id: q._id || q.id,
+                        question: q.question,
+                        options: q.options,
+                        correctAnswer: typeof q.correctAnswer === 'string' ? parseInt(q.correctAnswer) || 0 : q.correctAnswer,
+                        explanation: q.explanation,
+                        category: q.category || 'general',
+                        difficulty: q.difficulty || 'moyen',
+                        // Fix Image Mapping: preserve object or string, don't force stringification of objects
+                        image: q.image
+                    };
+                }).filter(Boolean);
 
-                if (!fullQ) return null;
-
-                // Map to QuestionData format expected by Wizard
-                return {
-                    id: fullQ.id || fullQ._id,
-                    question: fullQ.question,
-                    options: fullQ.options,
-                    correctAnswer: typeof fullQ.correctAnswer === 'string' ? parseInt(fullQ.correctAnswer) || 0 : fullQ.correctAnswer,
-                    explanation: fullQ.explanation,
-                    category: fullQ.category || 'general',
-                    difficulty: fullQ.difficulty || 'moyen',
-                    image: fullQ.image ? {
-                        url: fullQ.image,
-                        filename: 'image', // Placeholder 
-                        size: 0
-                    } : undefined
-                };
-            }).filter(Boolean); // Remove nulls
-
-            setEditingItem(item);
-            setEditingTestQuestions(fullQuestions);
-            setWizardMode('edit');
-            setIsWizardOpen(true);
+                setEditingItem(fullTest);
+                setEditingTestQuestions(fullQuestionsData);
+                setWizardMode('edit');
+                setIsWizardOpen(true);
+            } catch (error) {
+                console.error("Error loading test details:", error);
+                toast.error("Impossible de charger les détails du test");
+            }
         } else {
             setEditingItem(item);
             setIsDialogOpen(true);
@@ -521,7 +514,7 @@ export function TestManagement() {
     };
 
     return (
-        <div className="space-y-6 animate-fade-in pt-[10%]">
+        <div className="space-y-6 animate-fade-in">
             {/* Title & Actions */}
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div>
@@ -730,8 +723,8 @@ export function TestManagement() {
 
                 {/* Pagination Controls */}
                 {filteredData.length > itemsPerPage && (
-                    <div className="flex items-center justify-between mt-4">
-                        <p className="text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row items-center justify-between mt-4 gap-4">
+                        <p className="text-sm text-muted-foreground text-center sm:text-left">
                             Affichage de {((currentPage - 1) * itemsPerPage) + 1} à {Math.min(currentPage * itemsPerPage, filteredData.length)} sur {filteredData.length}
                         </p>
                         <div className="flex items-center gap-2">

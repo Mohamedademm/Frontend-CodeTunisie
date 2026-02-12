@@ -25,6 +25,8 @@ export interface Video {
   progress?: number;
   thumbnail?: string;
   url: string;
+  videoUrl?: string;
+  videoType?: 'url' | 'upload';
   views?: number;
   isPremium?: boolean;
 }
@@ -62,7 +64,7 @@ export interface Question {
   options: string[];
   correctAnswer: number | string; // Handle both index and value
   explanation: string;
-  image?: string;
+  image?: string | { url: string; filename?: string; size?: number };
   category?: string;
   difficulty?: string;
   isFavorite?: boolean;
