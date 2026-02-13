@@ -12,6 +12,9 @@ import { Test, Question } from '@/app/types';
 import { testService } from '@/services/testService';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
+import { useTTS } from '@/hooks/useTTS';
+import { Switch } from '@/app/components/ui/switch';
+import { Volume2 } from 'lucide-react';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -54,6 +57,33 @@ export function TestTakingPage() {
     const [isPassed, setIsPassed] = useState(false);
     const [showPerfectScore, setShowPerfectScore] = useState(false);
     const [showReport, setShowReport] = useState(false);
+
+    // TTS State
+    const [autoRead, setAutoRead] = useState(true); // Default to Auto-read ON
+    const { speak, cancel, isSpeaking, isSupported } = useTTS({ language: 'ar-TN' });
+
+    // Auto-read effect
+    useEffect(() => {
+        if (view === 'quiz' && autoRead && questions[currentQuestionIndex]) {
+            const q = questions[currentQuestionIndex];
+
+            // Construct text with natural Arabic pauses/flow
+            // "السؤال: [Question]. الإجابات: [Option 1]. [Option 2]..."
+            // Using slightly longer pauses (commas/periods) for TTS engine
+            const textToRead = `السؤال: ${q.question}.  الإجابات:  ${q.options.join('.  ')}`;
+
+            // Small delay to allow transition animation to finish before speaking
+            const timer = setTimeout(() => speak(textToRead), 700);
+            return () => clearTimeout(timer);
+        } else if (!autoRead) {
+            cancel();
+        }
+    }, [currentQuestionIndex, autoRead, view, questions]);
+
+    // Stop speaking when leaving quiz view
+    useEffect(() => {
+        if (view !== 'quiz') cancel();
+    }, [view]);
 
     useEffect(() => {
         if (id) {
@@ -271,6 +301,40 @@ export function TestTakingPage() {
                         <div className="flex items-center gap-4">
                             <div className="font-bold text-lg truncate max-w-[150px] md:max-w-[300px] dark:text-white transition-colors">{test.title}</div>
 
+                            {/* TTS Controls */}
+                            {isSupported && (
+                                <div className="hidden sm:flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-full shadow-sm">
+                                    <Volume2 className={`w-4 h-4 ${isSpeaking ? 'text-primary animate-pulse' : 'text-gray-500'}`} />
+
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-xs font-medium whitespace-nowrap hidden md:inline-block">Lecture auto</span>
+                                            <Switch
+                                                checked={autoRead}
+                                                onCheckedChange={setAutoRead}
+                                                className="scale-75 data-[state=checked]:bg-primary"
+                                            />
+                                        </div>
+
+                                        <div className="h-4 w-px bg-gray-300 dark:bg-gray-600 mx-1"></div>
+
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="h-6 px-2 text-xs hover:bg-white dark:hover:bg-gray-600 rounded-full"
+                                            onClick={() => {
+                                                const q = questions[currentQuestionIndex];
+                                                const textToRead = `السؤال: ${q.question}.  الإجابات:  ${q.options.join('.  ')}`;
+                                                speak(textToRead);
+                                            }}
+                                            title="Tout relire"
+                                        >
+                                            Relire tout
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Question Navigator */}
                             <Sheet>
                                 <SheetTrigger asChild>
@@ -367,8 +431,17 @@ export function TestTakingPage() {
                                 <Badge variant="outline" className="capitalize">{questions[currentQuestionIndex].category}</Badge>
                             </div>
 
-                            <h2 dir="auto" className="text-2xl md:text-3xl font-bold dark:text-white leading-tight">
-                                {question.question}
+                            <h2 dir="auto" className="text-2xl md:text-3xl font-bold dark:text-white leading-tight flex gap-3 items-start">
+                                <span className="flex-1">{question.question}</span>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => speak(question.question)}
+                                    className="shrink-0 text-primary hover:bg-primary/10 rounded-full"
+                                    title="Écouter la question"
+                                >
+                                    <Volume2 className="w-6 h-6" />
+                                </Button>
                             </h2>
 
                             {(() => {
@@ -435,12 +508,12 @@ export function TestTakingPage() {
                                 {question.options.map((option, idx) => {
                                     const isSelected = answers[currentQuestionIndex] === idx;
                                     return (
-                                        <motion.button
+                                        <motion.div
                                             key={idx}
                                             whileHover={{ scale: 1.02, backgroundColor: isSelected ? undefined : "rgba(59, 130, 246, 0.05)" }}
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleAnswerSelect(idx)}
-                                            className={`text-start p-6 rounded-xl border-2 transition-all duration-200 text-lg group flex items-start gap-4 w-full ${isSelected
+                                            className={`text-start p-6 rounded-xl border-2 transition-all duration-200 text-lg group flex items-start gap-4 w-full cursor-pointer ${isSelected
                                                 ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-400 dark:text-white shadow-md'
                                                 : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-gray-200 hover:border-blue-300 dark:hover:border-blue-500'
                                                 }`}
@@ -449,8 +522,22 @@ export function TestTakingPage() {
                                                 }`}>
                                                 {isSelected && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2.5 h-2.5 bg-white rounded-full" />}
                                             </div>
-                                            <span dir="auto" className="w-full">{option}</span>
-                                        </motion.button>
+                                            <div className="flex flex-1 items-center gap-3">
+                                                <span dir="auto" className="flex-1 text-lg leading-relaxed">{option}</span>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        speak(option);
+                                                    }}
+                                                    className="w-8 h-8 rounded-full opacity-50 hover:opacity-100 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition-all shrink-0"
+                                                    title="Écouter l'option"
+                                                >
+                                                    <Volume2 className="w-4 h-4" />
+                                                </Button>
+                                            </div>
+                                        </motion.div>
                                     );
                                 })}
                             </div>
