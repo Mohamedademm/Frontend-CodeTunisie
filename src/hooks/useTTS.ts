@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 interface UseTTSProps {
-    language?: string; // Default 'ar-TN' for Tunisian Arabic
+    language?: string; // e.g. 'ar-TN'
     rate?: number;     // Speed
     pitch?: number;    // Pitch
     volume?: number;   // Volume
@@ -13,29 +13,10 @@ export function useTTS({
     pitch = 1,
     volume = 1
 }: UseTTSProps = {}) {
-    const [isSupported, setIsSupported] = useState(false);
     const [isSpeaking, setIsSpeaking] = useState(false);
-    const [isPaused, setIsPaused] = useState(false);
-    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-    const [activevoice, setActiveVoice] = useState<SpeechSynthesisVoice | null>(null);
 
-    // Audio player for API-based TTS (Professional)
+    // Audio player for API-based TTS (Professional) & Google Fallback
     const audioRef = useRef<HTMLAudioElement | null>(null);
-
-    // Check browser support for fallback
-    useEffect(() => {
-        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-            setIsSupported(true);
-            const loadVoices = () => {
-                const availableVoices = window.speechSynthesis.getVoices();
-                setVoices(availableVoices);
-            };
-            loadVoices();
-            if (window.speechSynthesis.onvoiceschanged !== undefined) {
-                window.speechSynthesis.onvoiceschanged = loadVoices;
-            }
-        }
-    }, []);
 
     const playAudioBlob = (blob: Blob) => {
         const url = URL.createObjectURL(blob);
@@ -46,6 +27,9 @@ export function useTTS({
         const audio = new Audio(url);
         audioRef.current = audio;
         audio.volume = volume;
+        // HTML5 Audio doesn't support pitch/rate natively in the same way, 
+        // but playbackRate exists
+        audio.playbackRate = rate;
 
         audio.onplay = () => setIsSpeaking(true);
         audio.onended = () => {
@@ -55,7 +39,6 @@ export function useTTS({
         audio.onerror = (e) => {
             console.error("TTS Audio Error:", e);
             setIsSpeaking(false);
-            // Fallback to local if audio fails?
         };
         audio.play().catch(console.error);
     };
@@ -65,54 +48,60 @@ export function useTTS({
 
         // Stop previous
         if (typeof window !== 'undefined') window.speechSynthesis.cancel();
-        if (audioRef.current) audioRef.current.pause();
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current = null;
+        }
         setIsSpeaking(false);
 
         // STRATEGY 1: Professional API (Backend)
-        // We try to call our /api/tts/speak endpoint
         try {
-            console.log("TTS: Attempting Professional API call...");
             const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-            // Adjusted url construction to handle potential slash issues
             const baseUrl = apiBase.endsWith('/api') ? apiBase : `${apiBase}/api`;
-            const endpoint = `${baseUrl.replace(/\/api\/api$/, '/api')}/tts/speak`; // Safety check
+            const endpoint = `${baseUrl.replace(/\/api\/api$/, '/api')}/tts/speak`;
 
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, voiceId: '21m00Tcm4TlvDq8ikWAM' }) // 'Rachel' default, replace with Arabic ID
+                body: JSON.stringify({ text, voiceId: '21m00Tcm4TlvDq8ikWAM' }) // 'Rachel' default
             });
 
             if (response.ok) {
                 const blob = await response.blob();
-                console.log("TTS: Using Professional API Audio");
                 playAudioBlob(blob);
                 return; // Success!
-            } else {
-                console.warn("TTS: API Unavailable, switching to fallback.");
             }
         } catch (err) {
-            console.warn("TTS: API Connection failed, switching to fallback.", err);
+            console.warn("TTS: API Connection failed, switching to fallback.");
         }
 
         // STRATEGY 2: Fallback to Web Speech / Online Google
         console.log("TTS: Using Fallback Strategy");
 
-        // Try Google Translate hack for Arabic
         try {
+            // Google Translate TTS Fallback
+            // Note: Google Translate TTS ignores rate/pitch params in the URL typically
             const encodedText = encodeURIComponent(text);
-            const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ar&q=${encodedText}`;
+            // Use props language if valid, else default to 'ar'
+            const targetLang = language.startsWith('ar') ? 'ar' : language;
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${targetLang}&q=${encodedText}`;
+
             const audio = new Audio(url);
             audioRef.current = audio;
             audio.volume = volume;
+            audio.playbackRate = rate; // Try to apply rate here
+
             audio.onplay = () => setIsSpeaking(true);
             audio.onended = () => setIsSpeaking(false);
             audio.play().catch(e => {
                 console.error("TTS Online Google Fallback failed:", e);
-                // Final resort: Native
-                if (isSupported) {
+                // Final resort: Native SpeechSynthesis
+                if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
                     const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.lang = 'ar';
+                    utterance.lang = language; // Use the prop
+                    utterance.rate = rate;     // Use the prop
+                    utterance.pitch = pitch;   // Use the prop
+                    utterance.volume = volume; // Use the prop
                     window.speechSynthesis.speak(utterance);
                 }
             });
@@ -120,20 +109,43 @@ export function useTTS({
             console.error(e);
         }
 
-    }, [volume, isSupported]);
+    }, [volume, rate, pitch, language]);
 
     const cancel = useCallback(() => {
         if (typeof window !== 'undefined') window.speechSynthesis.cancel();
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current = null;
+        }
+        setIsSpeaking(false);
+    }, []);
+
+    // Pause/Resume logic simplified for Audio/Speech mix
+    const pause = useCallback(() => {
+        if (typeof window !== 'undefined' && window.speechSynthesis.speaking) {
+            window.speechSynthesis.pause();
+        }
         if (audioRef.current) audioRef.current.pause();
         setIsSpeaking(false);
     }, []);
 
+    const resume = useCallback(() => {
+        if (typeof window !== 'undefined' && window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+            setIsSpeaking(true);
+        }
+        if (audioRef.current && audioRef.current.paused) {
+            audioRef.current.play();
+            setIsSpeaking(true);
+        }
+    }, []);
+
     return {
-        isSupported: true, // Always true because of fallbacks
+        isSupported: true,
         isSpeaking,
         speak,
         cancel,
-        pause: cancel, // Simple pause=cancel for now
-        resume: () => { },
+        pause,
+        resume
     };
 }
