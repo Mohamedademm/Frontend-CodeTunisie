@@ -24,13 +24,11 @@ export interface AdminStats {
 }
 
 export const adminService = {
-    // Get dashboard statistics
     async getStats(): Promise<AdminStats> {
         const response = await api.get('/admin/stats');
         return response.data.stats;
     },
 
-    // User Management
     async getUsers(filters?: { role?: string; isPremium?: boolean; search?: string }): Promise<UserProfile[]> {
         const params = new URLSearchParams();
         if (filters?.role) params.append('role', filters.role);
@@ -55,9 +53,7 @@ export const adminService = {
         await api.delete(`/admin/users/${userId}`);
     },
 
-    // Course Management
     async getCourses(): Promise<Course[]> {
-        // Keep using admin endpoint to view ALL courses (including unpublished)
         const response = await api.get('/admin/courses');
         return response.data.courses;
     },
@@ -76,7 +72,6 @@ export const adminService = {
         await api.delete(`/courses/${courseId}`);
     },
 
-    // Video Management
     async getVideos(): Promise<Video[]> {
         const response = await api.get('/admin/videos');
         return response.data.videos;
@@ -102,7 +97,6 @@ export const adminService = {
         await api.delete(`/videos/${videoId}`);
     },
 
-    // Test Management
     async getTests(): Promise<Test[]> {
         const response = await api.get('/tests');
         return response.data.tests;
@@ -127,7 +121,6 @@ export const adminService = {
         await api.delete(`/tests/${testId}`);
     },
 
-    // Question Management
     async getQuestions(filters?: { category?: string; difficulty?: string }): Promise<Question[]> {
         const params = new URLSearchParams();
         if (filters?.category) params.append('category', filters.category);
@@ -151,7 +144,6 @@ export const adminService = {
         await api.delete(`/questions/${questionId}`);
     },
 
-    // Payment Management
     async getPayments(filters?: { status?: string; userId?: string }): Promise<Payment[]> {
         const params = new URLSearchParams();
         if (filters?.status) params.append('status', filters.status);
@@ -161,7 +153,6 @@ export const adminService = {
         return response.data.payments;
     },
 
-    // Settings Management
     async getSettings(): Promise<any> {
         const response = await api.get('/admin/settings');
         return response.data.settings;
@@ -172,7 +163,6 @@ export const adminService = {
         return response.data.settings;
     },
 
-    // Image Upload for Questions
     async uploadQuestionImage(formData: FormData): Promise<{ success: boolean; message: string; data: { url: string; filename: string; size: number; uploadedAt: Date } }> {
         const response = await api.post('/admin/upload-question-image', formData, {
             headers: {

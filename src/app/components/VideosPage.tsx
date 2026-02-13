@@ -59,7 +59,7 @@ export function VideosPage() {
 
   const handleShare = () => {
     if (!selectedVideo) return;
-    const url = window.location.href; // In real app, might be specific video link
+    const url = window.location.href;
     navigator.clipboard.writeText(url);
     toast.success("Lien copié !");
   };
@@ -92,7 +92,6 @@ export function VideosPage() {
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,7 +111,6 @@ export function VideosPage() {
           </p>
         </motion.div>
 
-        {/* Search */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,7 +131,6 @@ export function VideosPage() {
           </div>
         </motion.div>
 
-        {/* Category Pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -166,7 +163,6 @@ export function VideosPage() {
           </Button>
         </motion.div>
 
-        {/* Error Message */}
         {error && (
           <div className="mb-8 p-4 bg-destructive/10 text-destructive rounded-xl flex items-center gap-2">
             <AlertCircle className="w-5 h-5" />
@@ -174,7 +170,6 @@ export function VideosPage() {
           </div>
         )}
 
-        {/* Video Stats */}
         {!isLoading && !error && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -206,7 +201,6 @@ export function VideosPage() {
           </motion.div>
         )}
 
-        {/* Results count */}
         {searchQuery || selectedCategory !== "Tous" ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -218,7 +212,6 @@ export function VideosPage() {
           </motion.div>
         ) : null}
 
-        {/* Video Grid */}
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="w-10 h-10 animate-spin text-secondary" />
@@ -257,7 +250,6 @@ export function VideosPage() {
         )}
       </div>
 
-      {/* Video Player Modal */}
       <Dialog
         open={!!selectedVideo}
         onOpenChange={() => setSelectedVideo(null)}
@@ -274,11 +266,9 @@ export function VideosPage() {
 
           {selectedVideo && (
             <div className="space-y-4">
-              {/* Video Player */}
               <div className="relative aspect-video bg-black rounded-xl overflow-hidden">
                 {selectedVideo.url ? (
                   <div className="w-full h-full">
-                    {/* Check for Uploaded/Local Video */}
                     {(selectedVideo.videoType === 'upload' || selectedVideo.url.startsWith('/uploads')) ? (
                       <video
                         controls
@@ -296,7 +286,6 @@ export function VideosPage() {
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     ) : getYouTubeId(selectedVideo.url) ? (
-                      /* YouTube Player */
                       <iframe
                         width="100%"
                         height="100%"
@@ -307,7 +296,6 @@ export function VideosPage() {
                         className="w-full h-full border-0"
                       ></iframe>
                     ) : (
-                      /* Fallback / Error */
                       <div className="flex items-center justify-center h-full text-white bg-gray-900 flex-col gap-2">
                         <AlertCircle className="w-8 h-8 text-red-400" />
                         <p>Format vidéo non supporté ou URL invalide</p>
@@ -322,7 +310,6 @@ export function VideosPage() {
                 )}
               </div>
 
-              {/* Video Info */}
               <div className="glass-effect rounded-xl p-4 border border-border">
                 <p className="text-muted-foreground mb-4">
                   {selectedVideo.description}
@@ -349,7 +336,6 @@ export function VideosPage() {
                 </div>
               </div>
 
-              {/* Related Videos */}
               {relatedVideos.length > 0 && (
                 <div className="space-y-3 pt-4">
                   <h4 className="font-semibold text-lg">Vidéos similaires</h4>

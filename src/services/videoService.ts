@@ -8,7 +8,6 @@ export interface VideoFilters {
 }
 
 export const videoService = {
-    // Get all videos with optional filters
     async getVideos(filters?: VideoFilters): Promise<Video[]> {
         const params = new URLSearchParams();
         if (filters?.category) params.append('category', filters.category);
@@ -23,7 +22,7 @@ export const videoService = {
             category: video.category,
             duration: video.duration || '0:00',
             progress: 0,
-            thumbnail: video.thumbnail || video.imageUrl || '', // Handle different field names
+            thumbnail: video.thumbnail || video.imageUrl || '',
             url: video.videoUrl || video.url || '',
             videoType: video.videoType || 'url',
             views: video.viewCount || 0,
@@ -31,7 +30,6 @@ export const videoService = {
         }));
     },
 
-    // Get single video by ID
     async getVideoById(id: string): Promise<Video> {
         const response = await api.get(`/videos/${id}`);
         const video = response.data.video;
@@ -48,7 +46,6 @@ export const videoService = {
         };
     },
 
-    // Get videos by category
     async getVideosByCategory(category: string): Promise<Video[]> {
         const response = await api.get(`/videos/category/${category}`);
         return response.data.videos.map((video: any) => ({
@@ -64,25 +61,20 @@ export const videoService = {
         }));
     },
 
-    // Increment view count
     async incrementViewCount(id: string): Promise<void> {
         await api.post(`/videos/${id}/view`);
     },
 
-    // Admin: Create video
     async createVideo(videoData: Partial<Video>): Promise<Video> {
         const response = await api.post('/videos', videoData);
-        // Return mapped object not implemented here fully as it's admin side, but generally consistent
         return response.data.video;
     },
 
-    // Admin: Update video
     async updateVideo(id: string, videoData: Partial<Video>): Promise<Video> {
         const response = await api.put(`/videos/${id}`, videoData);
         return response.data.video;
     },
 
-    // Admin: Delete video
     async deleteVideo(id: string): Promise<void> {
         await api.delete(`/videos/${id}`);
     },
