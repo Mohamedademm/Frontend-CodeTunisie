@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Plus, Edit, Trash2, FileText, HelpCircle, CheckCircle, Filter, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent } from '@/app/components/ui/card';
@@ -14,9 +15,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { adminService } from '@/services/adminService';
 import { Test, Question } from '@/app/types';
 import { toast } from 'sonner';
-import TestBuilderWizard from './TestBuilder/TestBuilderWizard';
 
 export function TestManagement() {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('tests');
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
@@ -31,12 +32,9 @@ export function TestManagement() {
     const [tests, setTests] = useState<Test[]>([]);
     const [questions, setQuestions] = useState<Question[]>([]);
 
-    // Form states
+    // Form states (for question dialog only)
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingItem, setEditingItem] = useState<any | null>(null);
-    const [isWizardOpen, setIsWizardOpen] = useState(false);
-    const [wizardMode, setWizardMode] = useState<'create' | 'edit'>('create');
-    const [editingTestQuestions, setEditingTestQuestions] = useState<any[]>([]);
 
     useEffect(() => {
         loadData();
@@ -74,39 +72,9 @@ export function TestManagement() {
 
     const handleEdit = async (item: any) => {
         if (activeTab === 'tests') {
-            try {
-                // Fetch full test details to ensure we have all questions and correct data
-                const fullTest = await adminService.getTestById(item.id || item._id);
-
-                // Prepared data for Test Builder Wizard
-                const testQuestions = Array.isArray(fullTest.questions) ? fullTest.questions : [];
-
-                // Map question objects to full QuestionData objects
-                const fullQuestionsData = testQuestions.map((q: any) => {
-                    // Normalize question object (handle if it's just an ID - though getTestById should populate)
-                    if (typeof q === 'string') return null; // Should be populated
-
-                    return {
-                        id: q._id || q.id,
-                        question: q.question,
-                        options: q.options,
-                        correctAnswer: typeof q.correctAnswer === 'string' ? parseInt(q.correctAnswer) || 0 : q.correctAnswer,
-                        explanation: q.explanation,
-                        category: q.category || 'general',
-                        difficulty: q.difficulty || 'moyen',
-                        // Fix Image Mapping: preserve object or string, don't force stringification of objects
-                        image: q.image
-                    };
-                }).filter(Boolean);
-
-                setEditingItem(fullTest);
-                setEditingTestQuestions(fullQuestionsData);
-                setWizardMode('edit');
-                setIsWizardOpen(true);
-            } catch (error) {
-                console.error("Error loading test details:", error);
-                toast.error("Impossible de charger les détails du test");
-            }
+            // Navigate to full-page editor
+            const testId = item.id || item._id;
+            navigate(`/admin/tests/${testId}/edit`);
         } else {
             setEditingItem(item);
             setIsDialogOpen(true);
@@ -422,12 +390,22 @@ export function TestManagement() {
 
         const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
+            const filledOptions = formData.options.filter((opt: string) => opt.trim() !== '');
+            if (filledOptions.length < 2) {
+                toast.error("Veuillez renseigner au moins 2 options de réponse.");
+                return;
+            }
+            if (!formData.correctAnswer || !filledOptions.includes(formData.correctAnswer)) {
+                toast.error("Veuillez sélectionner la bonne réponse parmi les options renseignées.");
+                return;
+            }
+            const payload = { ...formData, options: filledOptions };
             try {
                 if (editingItem) {
-                    await adminService.updateQuestion(editingItem.id || editingItem._id, formData);
+                    await adminService.updateQuestion(editingItem.id || editingItem._id, payload);
                     toast.success("Question mise à jour");
                 } else {
-                    await adminService.createQuestion(formData);
+                    await adminService.createQuestion(payload);
                     toast.success("Question ajoutée");
                 }
                 onClose();
@@ -492,10 +470,9 @@ export function TestManagement() {
                             </div>
                             <div className="flex-1">
                                 <Input
-                                    placeholder={`Option ${i + 1}`}
+                                    placeholder={`Option ${i + 1}${i < 2 ? ' *' : ' (optionnel)'}`}
                                     value={opt}
                                     onChange={e => handleOptionChange(i, e.target.value)}
-                                    required
                                     className={formData.correctAnswer === opt && opt !== '' ? "border-green-500 ring-1 ring-green-500" : ""}
                                 />
                             </div>
@@ -514,7 +491,7 @@ export function TestManagement() {
     };
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="p-4 md:p-6 lg:p-8 space-y-6 animate-fade-in">
             {/* Title & Actions */}
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div>
@@ -607,7 +584,7 @@ export function TestManagement() {
                         </DropdownMenu>
                         {activeTab === 'tests' && (
                             <Button
-                                onClick={() => setIsWizardOpen(true)}
+                                onClick={() => navigate('/admin/tests/create')}
                                 variant="default"
                                 className="gap-2"
                             >
@@ -740,25 +717,6 @@ export function TestManagement() {
                 )}
             </Tabs>
 
-            {/* Test Builder Wizard */}
-            <TestBuilderWizard
-                open={isWizardOpen}
-                onClose={() => {
-                    setIsWizardOpen(false);
-                    setWizardMode('create');
-                    setEditingItem(null);
-                    setEditingTestQuestions([]);
-                }}
-                onSuccess={() => {
-                    loadData();
-                    setIsWizardOpen(false);
-                    setWizardMode('create');
-                    setEditingItem(null);
-                }}
-                mode={wizardMode}
-                initialData={editingItem}
-                initialQuestions={editingTestQuestions}
-            />
         </div>
     );
 }

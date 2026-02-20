@@ -41,6 +41,7 @@ const Analytics = lazy(() => import('@/app/components/admin/Analytics').then(mod
 const PaymentManagement = lazy(() => import('@/app/components/admin/PaymentManagement').then(module => ({ default: module.PaymentManagement })));
 const NotificationCenter = lazy(() => import('@/app/components/admin/NotificationCenter').then(module => ({ default: module.NotificationCenter })));
 const SiteSettings = lazy(() => import('@/app/components/admin/SiteSettings').then(module => ({ default: module.SiteSettings })));
+const TestBuilderPage = lazy(() => import('@/app/components/admin/TestBuilder/TestBuilderPage'));
 
 // Layout wrapper for authenticated pages
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -251,6 +252,28 @@ export default function App() {
                     <ProtectedRoute requireAdmin>
                       <AdminLayout>
                         <TestManagement />
+                      </AdminLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/tests/create"
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <AdminLayout>
+                        <TestBuilderPage />
+                      </AdminLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin/tests/:id/edit"
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <AdminLayout>
+                        <TestBuilderPage />
                       </AdminLayout>
                     </ProtectedRoute>
                   }

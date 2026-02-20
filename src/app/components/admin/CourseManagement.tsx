@@ -358,8 +358,8 @@ export function CourseManagement() {
                                 type="button"
                                 onClick={() => setVideoSource('url')}
                                 className={`flex-1 py-2.5 px-4 text-sm font-medium transition-all flex items-center justify-center gap-2 ${videoSource === 'url'
-                                        ? 'bg-indigo-500/20 text-indigo-300 border-b-2 border-indigo-500'
-                                        : 'bg-white/[0.02] text-gray-400 hover:bg-white/[0.05]'
+                                    ? 'bg-indigo-500/20 text-indigo-300 border-b-2 border-indigo-500'
+                                    : 'bg-white/[0.02] text-gray-400 hover:bg-white/[0.05]'
                                     }`}
                             >
                                 <VideoIcon className="w-4 h-4" />
@@ -369,8 +369,8 @@ export function CourseManagement() {
                                 type="button"
                                 onClick={() => setVideoSource('upload')}
                                 className={`flex-1 py-2.5 px-4 text-sm font-medium transition-all flex items-center justify-center gap-2 ${videoSource === 'upload'
-                                        ? 'bg-emerald-500/20 text-emerald-300 border-b-2 border-emerald-500'
-                                        : 'bg-white/[0.02] text-gray-400 hover:bg-white/[0.05]'
+                                    ? 'bg-emerald-500/20 text-emerald-300 border-b-2 border-emerald-500'
+                                    : 'bg-white/[0.02] text-gray-400 hover:bg-white/[0.05]'
                                     }`}
                             >
                                 <Plus className="w-4 h-4" />
@@ -402,10 +402,10 @@ export function CourseManagement() {
                                 onDragOver={handleDragOver}
                                 onDragLeave={handleDragLeave}
                                 className={`mt-1 border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all duration-200 ${isDragging
-                                        ? 'border-emerald-500 bg-emerald-500/10'
-                                        : selectedFile
-                                            ? 'border-emerald-500/30 bg-emerald-500/5'
-                                            : 'border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]'
+                                    ? 'border-emerald-500 bg-emerald-500/10'
+                                    : selectedFile
+                                        ? 'border-emerald-500/30 bg-emerald-500/5'
+                                        : 'border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]'
                                     }`}
                                 onClick={() => document.getElementById('video-file-input')?.click()}
                             >
@@ -505,7 +505,7 @@ export function CourseManagement() {
     };
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="p-4 md:p-6 lg:p-8 space-y-6 animate-fade-in">
             {/* Title & Actions */}
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div>

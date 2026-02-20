@@ -48,7 +48,7 @@ export function AdminDashboard() {
     ];
 
     return (
-        <div className="space-y-6">
+        <div className="p-4 md:p-6 lg:p-8 space-y-6">
             {/* Page Header */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

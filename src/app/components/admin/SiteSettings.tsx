@@ -177,7 +177,7 @@ export function SiteSettings() {
     );
 
     return (
-        <div className="space-y-8 max-w-4xl">
+        <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-4xl">
             {/* Page Header */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -226,8 +226,8 @@ export function SiteSettings() {
                                         <div key={item.step} className={`flex items-center gap-2.5 p-2.5 rounded-lg text-xs ${item.done ? 'bg-emerald-500/10 border border-emerald-500/15' : 'bg-white/[0.02] border border-white/5'
                                             }`}>
                                             <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-bold ${item.done
-                                                    ? 'bg-emerald-500 text-white'
-                                                    : 'bg-white/10 text-gray-400'
+                                                ? 'bg-emerald-500 text-white'
+                                                : 'bg-white/10 text-gray-400'
                                                 }`}>
                                                 {item.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : item.step}
                                             </div>

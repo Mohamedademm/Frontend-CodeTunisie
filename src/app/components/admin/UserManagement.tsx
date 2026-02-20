@@ -207,7 +207,7 @@ export function UserManagement() {
     }, [users]);
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="p-4 md:p-6 lg:p-8 space-y-6 animate-fade-in">
             {/* Stats Cards - kept same as before */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-100 dark:border-blue-800">

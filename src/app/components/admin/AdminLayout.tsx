@@ -37,7 +37,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <motion.main
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 md:p-6 lg:p-8 pt-20"
+                    className="pt-16 min-h-[calc(100vh-4rem)] flex flex-col"
                 >
                     {children}
                 </motion.main>
