@@ -19,6 +19,37 @@ export interface TestResult {
     }[];
 }
 
+export interface TestSubmissionResponse {
+    success: boolean;
+    message: string;
+    testAttempt: TestAttempt;
+    score: number;
+    passed: boolean;
+    correctCount: number;
+    totalQuestions: number;
+    // Gamification
+    xpEarned: number;
+    oldXp: number;
+    newTotalXp: number;
+    oldLevel: number;
+    newLevel: number;
+    leveledUp: boolean;
+    newLevelTitle: string;
+    newBadges: {
+        id: string;
+        name: string;
+        icon: string;
+        earnedDate: string;
+    }[];
+    // Navigation
+    nextTest: {
+        id: string;
+        title: string;
+        category: string;
+        duration: number;
+    } | null;
+}
+
 export const testService = {
     // Get all tests
     async getTests(filters?: { difficulty?: string; isPremium?: boolean }): Promise<Test[]> {
@@ -62,7 +93,7 @@ export const testService = {
     },
 
     // Submit test answers
-    async submitTest(submission: TestSubmission): Promise<any> {
+    async submitTest(submission: TestSubmission): Promise<TestSubmissionResponse> {
         const response = await api.post(`/tests/${submission.testId}/submit`, {
             answers: submission.answers,
             timeTaken: submission.timeTaken,

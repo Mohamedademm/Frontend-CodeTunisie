@@ -30,6 +30,7 @@ const PremiumPage = lazy(() => import('@/app/components/PremiumPage').then(modul
 const LawArticlesPage = lazy(() => import('@/app/components/LawArticlesPage').then(module => ({ default: module.LawArticlesPage })));
 const FlashcardsPage = lazy(() => import('@/app/components/FlashcardsPage').then(module => ({ default: module.FlashcardsPage })));
 const FavoritesPage = lazy(() => import('@/app/components/FavoritesPage').then(module => ({ default: module.FavoritesPage })));
+const RevisionPage = lazy(() => import('@/app/components/RevisionPage').then(module => ({ default: module.RevisionPage })));
 
 // Admin pages
 const AdminDashboard = lazy(() => import('@/app/components/admin/AdminDashboard').then(module => ({ default: module.AdminDashboard })));
@@ -170,6 +171,17 @@ export default function App() {
                     <ProtectedRoute>
                       <MainLayout>
                         <FavoritesPage />
+                      </MainLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/revision"
+                  element={
+                    <ProtectedRoute>
+                      <MainLayout>
+                        <RevisionPage />
                       </MainLayout>
                     </ProtectedRoute>
                   }

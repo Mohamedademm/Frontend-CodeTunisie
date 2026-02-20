@@ -26,13 +26,11 @@ export function Navigation() {
   const { t } = useTranslation();
 
   const navItems = [
-    { id: '/', label: t('common.courses') === 'Cours & Vidéos' ? 'Accueil' : (t('common.courses') === 'الدروس والفيديوهات' ? 'الرئيسية' : 'Home'), icon: LayoutDashboard, requireAuth: false }, // Temporary manual translation for Home as it wasn't in common
+    { id: '/', label: t('common.courses') === 'Cours & Vidéos' ? 'Accueil' : (t('common.courses') === 'الدروس والفيديوهات' ? 'الرئيسية' : 'Home'), icon: LayoutDashboard, requireAuth: false },
     { id: '/courses', label: t('common.courses'), icon: BookOpen, requireAuth: true },
     { id: '/law', label: t('common.courses') === 'Cours & Vidéos' ? 'Loi' : (t('common.courses') === 'الدروس والفيديوهات' ? 'مجلة الطرقات' : 'Law'), icon: Scale, requireAuth: true },
-    { id: '/videos', label: 'Vidéos', icon: Video, requireAuth: true }, // Need to add to translation
+    { id: '/videos', label: 'Vidéos', icon: Video, requireAuth: true },
     { id: '/tests', label: t('common.tests'), icon: FileText, requireAuth: true },
-    { id: '/flashcards', label: 'Révision', icon: BookOpen, requireAuth: true },
-    { id: '/favorites', label: 'Favoris', icon: Heart, requireAuth: true },
     { id: '/dashboard', label: t('common.dashboard'), icon: LayoutDashboard, requireAuth: true },
   ];
 

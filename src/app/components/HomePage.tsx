@@ -20,8 +20,8 @@ export function HomePage() {
     },
     {
       icon: Scale,
-      title: t('common.courses') === 'Cours & Vidéos' ? 'Code de la Route' : (t('common.courses') === 'الدروس والفيديوهات' ? 'مجلة الطرقات' : 'Traffic Law'),
-      description: t('common.courses') === 'Cours & Vidéos'
+      title: t('common.courses') === 'Cours ' ? 'Code de la Route' : (t('common.courses') === 'الدروس والفيديوهات' ? 'مجلة الطرقات' : 'Traffic Law'),
+      description: t('common.courses') === 'Cours '
         ? 'Consultez tous les articles du code de la route tunisien avec un assistant IA'
         : (t('common.courses') === 'الدروس والفيديوهات'
           ? 'تصفح جميع فصول مجلة الطرقات التونسية مع مساعد ذكي'
@@ -218,7 +218,7 @@ export function HomePage() {
                     <p className="text-muted-foreground">{feature.description}</p>
                     {feature.link && (
                       <Button variant="link" className="mt-2 p-0 text-primary">
-                        {t('common.courses') === 'Cours & Vidéos' ? 'Explorer' : (t('common.courses') === 'الدروس والفيديوهات' ? 'استكشف' : 'Explore')} <ArrowRight className="w-4 h-4 mr-1" />
+                        {t('common.courses') === 'Cours ' ? 'Explorer' : (t('common.courses') === 'الدروس والفيديوهات' ? 'استكشف' : 'Explore')} <ArrowRight className="w-4 h-4 mr-1" />
                       </Button>
                     )}
                   </CardContent>

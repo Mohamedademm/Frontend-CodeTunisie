@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ArrowLeft, CheckCircle, XCircle, RotateCcw, Clock, Save, Home, LayoutGrid, AlertCircle } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Clock, Save, LayoutGrid, AlertCircle, Volume2 } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Progress } from '@/app/components/ui/progress';
 import { Card, CardContent } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
-import { PerfectScore } from '@/app/components/ui/PerfectScore';
-import { Confetti } from '@/app/components/ui/Confetti';
 import { Test, Question } from '@/app/types';
 import { testService } from '@/services/testService';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
+import { TestResults } from './TestResults';
+import { TestSubmissionResponse } from '@/services/testService';
 import { useTTS } from '@/hooks/useTTS';
 import { Switch } from '@/app/components/ui/switch';
-import { Volume2 } from 'lucide-react';
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -51,12 +51,8 @@ export function TestTakingPage() {
     const [timeLeft, setTimeLeft] = useState<number>(0); // in seconds
     const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-    // View state
     const [view, setView] = useState<'intro' | 'quiz' | 'results'>('intro');
-    const [score, setScore] = useState(0);
-    const [isPassed, setIsPassed] = useState(false);
-    const [showPerfectScore, setShowPerfectScore] = useState(false);
-    const [showReport, setShowReport] = useState(false);
+    const [submissionResult, setSubmissionResult] = useState<TestSubmissionResponse | null>(null);
 
     // TTS State
     const [autoRead, setAutoRead] = useState(true); // Default to Auto-read ON
@@ -155,24 +151,6 @@ export function TestTakingPage() {
         setIsSubmitting(true);
 
         try {
-            // Calculate score locally for immediate feedback
-            let correctCount = 0;
-            questions.forEach((q, idx) => {
-                const userAnswer = answers[idx];
-                if (userAnswer !== null) {
-                    const isCorrect = typeof q.correctAnswer === 'number'
-                        ? userAnswer === q.correctAnswer
-                        : q.options[userAnswer] === q.correctAnswer;
-                    if (isCorrect) correctCount++;
-                }
-            });
-
-            const calculatedScore = Math.round((correctCount / questions.length) * 100);
-            const passed = calculatedScore >= (test?.passThreshold || 70);
-
-            setScore(calculatedScore);
-            setIsPassed(passed);
-
             // Submit to backend
             if (test) {
                 // Fix: Map answers to the format expected by the backend [{ questionId, selectedAnswer }]
@@ -187,34 +165,14 @@ export function TestTakingPage() {
                     return null;
                 }).filter(a => a !== null);
 
-                const result = await testService.submitTest({
+                // Use backend calculated score/status
+                const response = await testService.submitTest({
                     testId: test.id,
                     answers: formattedAnswers,
                     timeTaken: (test.duration || 0) * 60 - timeLeft
                 });
 
-                // Use backend calculated score/status
-                setScore(Math.round(result.score));
-                setIsPassed(result.passed);
-                if (Math.round(result.score) === 100) {
-                    setShowPerfectScore(true);
-                }
-
-                // Update questions with the full data returned from server
-                if (result.testAttempt && result.testAttempt.answers) {
-                    const fullQuestions = result.testAttempt.answers.map((ans: any) => {
-                        return {
-                            ...ans.question,
-                        };
-                    });
-
-                    const enrichedQuestions = questions.map(originalQ => {
-                        const enriched = fullQuestions.find((fq: any) => fq._id === originalQ._id);
-                        return enriched || originalQ;
-                    });
-
-                    setQuestions(enrichedQuestions);
-                }
+                setSubmissionResult(response);
             }
 
             setView('results');
@@ -590,204 +548,18 @@ export function TestTakingPage() {
 
     // RESULTS VIEW
 
-    if (view === 'results') {
+
+    if (view === 'results' && submissionResult && test) {
         return (
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 relative overflow-hidden">
-                {showPerfectScore && <PerfectScore onContinue={() => setShowPerfectScore(false)} />}
-                {isPassed && score < 100 && <Confetti />}
-
-                <div className="max-w-3xl mx-auto space-y-6 relative z-10">
-                    {/* Hero Score Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
-                    >
-                        <div className={`h-2 w-full ${isPassed ? 'bg-green-500' : 'bg-red-500'}`} />
-                        <div className="p-8 text-center space-y-6">
-                            <motion.div
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="relative inline-block"
-                            >
-                                <svg className="w-40 h-40 transform -rotate-90">
-                                    <circle
-                                        cx="80"
-                                        cy="80"
-                                        r="70"
-                                        stroke="currentColor"
-                                        strokeWidth="12"
-                                        fill="transparent"
-                                        className="text-gray-100 dark:text-gray-700"
-                                    />
-                                    <motion.circle
-                                        cx="80"
-                                        cy="80"
-                                        r="70"
-                                        stroke="currentColor"
-                                        strokeWidth="12"
-                                        fill="transparent"
-                                        strokeLinecap="round"
-                                        className={isPassed ? 'text-green-500' : 'text-red-500'}
-                                        initial={{ strokeDasharray: 440, strokeDashoffset: 440 }}
-                                        animate={{ strokeDashoffset: 440 - (440 * score) / 100 }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
-                                    />
-                                </svg>
-                                <div className="absolute inset-0 flex items-center justify-center flex-col">
-                                    <span className="text-4xl font-bold dark:text-white">{score}%</span>
-                                    <span className={`text-sm font-medium ${isPassed ? 'text-green-600' : 'text-red-500'}`}>
-                                        {isPassed ? t('tests.passed') : t('tests.failed')}
-                                    </span>
-                                </div>
-                            </motion.div>
-
-                            <div>
-                                <h1 className="text-3xl font-bold mb-2 dark:text-white">
-                                    {isPassed ? t('tests.passed_title') : t('tests.failed_title')}
-                                </h1>
-                                <p className="text-gray-600 dark:text-gray-300">
-                                    {isPassed ? t('tests.passed_msg') : t('tests.failed_msg')}
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Next Steps / Modern Scenario */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="grid md:grid-cols-2 gap-4"
-                    >
-                        {/* Recommendation Card */}
-                        <Card className="border-none shadow-lg dark:bg-gray-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
-                            <CardContent className="p-6">
-                                <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100 dark:bg-blue-900 dark:text-blue-300">
-                                    {t('tests.next_steps')}
-                                </Badge>
-                                <h3 className="text-xl font-bold mb-2 dark:text-white">
-                                    {isPassed ? t('tests.next_step_success') : t('tests.next_step_fail')}
-                                </h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
-                                    {isPassed
-                                        ? "Continuez sur votre lancée avec un test plus avancé pour consolider vos acquis."
-                                        : "Prenez le temps de revoir les points clés du cours avant de réessayer."}
-                                </p>
-                                <Button
-                                    className="w-full gap-2 shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5"
-                                    size="lg"
-                                    onClick={() => isPassed ? navigate('/tests') : navigate('/courses')}
-                                >
-                                    {isPassed ? (
-                                        <>
-                                            {t('tests.start_next_test')} <ArrowRight className="w-4 h-4" />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <RotateCcw className="w-4 h-4" /> {t('tests.review_course')}
-                                        </>
-                                    )}
-                                </Button>
-                            </CardContent>
-                        </Card>
-
-                        {/* Quick Actions */}
-                        <div className="space-y-4">
-                            <Card className="border-none shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800" onClick={() => setShowReport(!showReport)}>
-                                <CardContent className="p-6 flex items-center justify-between">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-600 dark:text-gray-300">
-                                            <LayoutGrid className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <div className="font-bold dark:text-white">{showReport ? t('tests.hide_full_report') : t('tests.view_full_report')}</div>
-                                            <div className="text-sm text-gray-500">{questions.length} questions</div>
-                                        </div>
-                                    </div>
-                                    <div className={`transform transition-transform ${showReport ? 'rotate-180' : ''}`}>
-                                        <ArrowRight className="w-5 h-5 text-gray-400 rotate-90" />
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            <Card className="border-none shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800" onClick={() => navigate('/dashboard')}>
-                                <CardContent className="p-6 flex items-center justify-between">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-600 dark:text-gray-300">
-                                            <Home className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <div className="font-bold dark:text-white">{t('tests.back_to_dashboard')}</div>
-                                            <div className="text-sm text-gray-500">{t('common.home')}</div>
-                                        </div>
-                                    </div>
-                                    <ArrowRight className="w-5 h-5 text-gray-400" />
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </motion.div>
-
-                    {/* Detailed Report (Collapsible) */}
-                    <AnimatePresence>
-                        {showReport && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                className="space-y-4 overflow-hidden"
-                            >
-                                <h3 className="text-xl font-bold dark:text-white px-2 pt-4">{t('tests.detailed_corrections')}</h3>
-                                {questions.map((q, idx) => {
-                                    const userAnswer = answers[idx];
-                                    const isCorrect = userAnswer !== null && (
-                                        typeof q.correctAnswer === 'number'
-                                            ? userAnswer === q.correctAnswer
-                                            : q.options[userAnswer] === q.correctAnswer
-                                    );
-
-                                    return (
-                                        <Card key={idx} className={`border-l-4 ${isCorrect ? 'border-l-green-500' : 'border-l-red-500'} dark:bg-gray-800`}>
-                                            <CardContent className="p-6">
-                                                <div className="flex gap-4">
-                                                    <div className="flex-shrink-0 mt-1">
-                                                        {isCorrect ? <CheckCircle className="w-6 h-6 text-green-500" /> : <XCircle className="w-6 h-6 text-red-500" />}
-                                                    </div>
-                                                    <div className="flex-1 space-y-3">
-                                                        <h4 className="font-semibold text-lg dark:text-white">{q.question}</h4>
-
-                                                        <div className="grid md:grid-cols-2 gap-4 text-sm">
-                                                            <div className={`p-3 rounded-lg border ${!isCorrect ? 'bg-red-50 border-red-200 dark:bg-red-900/20' : 'opacity-50'}`}>
-                                                                <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('tests.your_answer')}</span>
-                                                                <span className={!isCorrect ? 'font-medium text-red-700 dark:text-red-300' : ''}>
-                                                                    {userAnswer !== null ? q.options[userAnswer] : t('tests.no_answer')}
-                                                                </span>
-                                                            </div>
-                                                            <div className="p-3 rounded-lg border bg-green-50 border-green-200 dark:bg-green-900/20">
-                                                                <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('tests.correct_answer')}</span>
-                                                                <span className="font-medium text-green-700 dark:text-green-300">
-                                                                    {typeof q.correctAnswer === 'number' ? q.options[q.correctAnswer] : q.correctAnswer}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg text-sm text-blue-800 dark:text-blue-200">
-                                                            <strong>{t('common.explanation')}:</strong> {q.explanation}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    );
-                                })}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            </div>
+            <TestResults
+                results={submissionResult}
+                testTitle={test.title}
+                totalQuestions={questions.length}
+            />
         );
     }
 
     return null;
 }
+
+

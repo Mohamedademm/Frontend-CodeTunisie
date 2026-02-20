@@ -102,7 +102,7 @@ export function VideosPage() {
             <span className="text-sm font-medium">Bibliothèque Vidéo Premium</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary">
               {t('videos.title')}
             </span>
           </h1>
@@ -118,8 +118,8 @@ export function VideosPage() {
           className="max-w-2xl mx-auto mb-12"
         >
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary/50 to-primary/50 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-            <div className="relative flex items-center bg-black/40 backdrop-blur-xl rounded-2xl border border-white/10 p-2 shadow-2xl">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary/50 to-primary/50 rounded-2xl blur opacity-20 group-hover:opacity-60 transition duration-500"></div>
+            <div className="relative flex items-center bg-card backdrop-blur-xl rounded-2xl border border-border p-2 shadow-lg">
               <Search className="w-6 h-6 text-muted-foreground ml-4" />
               <Input
                 placeholder={t('videos.search_placeholder')}
@@ -144,7 +144,7 @@ export function VideosPage() {
               onClick={() => setSelectedCategory(category)}
               className={`rounded-full px-6 h-10 transition-all duration-300 ${selectedCategory === category
                 ? "bg-secondary text-secondary-foreground shadow-lg shadow-secondary/25 scale-105"
-                : "bg-background/50 backdrop-blur border-white/10 hover:bg-white/10 hover:border-white/20"
+                : "bg-card border-border text-foreground hover:bg-muted hover:border-primary/40"
                 }`}
             >
               {category}
@@ -155,7 +155,7 @@ export function VideosPage() {
             onClick={() => setSelectedCategory('favorites')}
             className={`rounded-full px-6 h-10 transition-all duration-300 gap-2 ${selectedCategory === 'favorites'
               ? "bg-red-500 text-white shadow-lg shadow-red-500/25 scale-105"
-              : "bg-background/50 backdrop-blur border-white/10 hover:bg-white/10 hover:border-white/20"
+              : "bg-card border-border text-foreground hover:bg-muted hover:border-red-400/40"
               }`}
           >
             <Heart className={`w-4 h-4 ${selectedCategory === 'favorites' ? 'fill-current' : ''}`} />
@@ -178,14 +178,14 @@ export function VideosPage() {
             className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto"
           >
             {[
-              { label: t('videos.stats.available'), value: videos.length, icon: VideoIcon, color: "text-blue-400" },
-              { label: t('videos.stats.completed'), value: videos.filter((v) => v.progress === 100).length, icon: Sparkles, color: "text-green-400" },
-              { label: t('videos.stats.total_views'), value: videos.length > 0 ? videos.reduce((acc, v) => acc + (v.views || 0), 0).toLocaleString() : 0, icon: Loader2, color: "text-purple-400" }
+              { label: t('videos.stats.available'), value: videos.length, icon: VideoIcon, color: "text-primary" },
+              { label: t('videos.stats.completed'), value: videos.filter((v) => v.progress === 100).length, icon: Sparkles, color: "text-success" },
+              { label: t('videos.stats.total_views'), value: videos.length > 0 ? videos.reduce((acc, v) => acc + (v.views || 0), 0).toLocaleString() : 0, icon: Loader2, color: "text-accent" }
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="relative overflow-hidden bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl group"
+                className="relative overflow-hidden bg-card border border-border shadow-md hover:shadow-lg hover:border-primary/30 p-6 rounded-2xl group transition-all duration-300"
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <stat.icon className="w-16 h-16" />

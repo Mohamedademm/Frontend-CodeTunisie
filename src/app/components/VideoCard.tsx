@@ -19,7 +19,7 @@ export function VideoCard({ video, onClick, isFavorite, onToggleFavorite }: Vide
       transition={{ duration: 0.3, type: 'spring', stiffness: 300 }}
     >
       <div
-        className="h-full relative overflow-hidden rounded-xl bg-card border border-white/5 hover:border-white/10 shadow-lg hover:shadow-2xl transition-all duration-500 group"
+        className="h-full relative overflow-hidden rounded-xl bg-card border border-border hover:border-primary/30 shadow-md hover:shadow-xl transition-all duration-500 group cursor-pointer"
         onClick={onClick}
       >
         <div className="relative aspect-video overflow-hidden">
@@ -30,8 +30,8 @@ export function VideoCard({ video, onClick, isFavorite, onToggleFavorite }: Vide
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-              <Play className="w-12 h-12 text-white/20" />
+            <div className="w-full h-full bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+              <Play className="w-12 h-12 text-muted-foreground/40" />
             </div>
           )}
 
@@ -65,12 +65,12 @@ export function VideoCard({ video, onClick, isFavorite, onToggleFavorite }: Vide
 
         <div className="p-5 flex flex-col gap-3">
           <div className="flex items-start justify-between gap-4">
-            <h3 className="font-semibold text-lg leading-tight text-white group-hover:text-primary transition-colors line-clamp-2">
+            <h3 className="font-semibold text-lg leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
               {video.title}
             </h3>
           </div>
 
-          <div className="flex items-center gap-3 text-sm text-gray-400">
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
             <Badge variant="outline" className="text-xs px-2 py-0.5 h-6 bg-secondary/10 text-secondary border-secondary/20 hover:bg-secondary/20">
               {video.category}
             </Badge>
@@ -86,7 +86,7 @@ export function VideoCard({ video, onClick, isFavorite, onToggleFavorite }: Vide
                 <span>Progression</span>
                 <span className="text-secondary font-medium">{video.progress}%</span>
               </div>
-              <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+              <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full bg-secondary transition-all duration-500"
                   style={{ width: `${video.progress}%` }}
